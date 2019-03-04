@@ -44,6 +44,7 @@ namespace MindFlavor.SQLServerExporter
 
                     context.Response.StatusCode = StatusCodes.Status200OK;
 
+
                     System.Text.StringBuilder sb = new System.Text.StringBuilder();
                     foreach (var s in bag)
                     {
@@ -68,8 +69,12 @@ namespace MindFlavor.SQLServerExporter
             var sqlServerInfo = await SQLServerUtils.GetSQLServerInfo(context, connectionString);
             var retString = await new Counters.WorkerThread(context, sqlServerInfo).QueryAndSerializeData();
             bag.Add(retString);
+
             var pc = await new Counters.PerformanceCounters(context, sqlServerInfo).QueryAndSerializeData();
             bag.Add(pc);
+
+            var waitStats = await new Counters.WaitStats(context, sqlServerInfo).QueryAndSerializeData();
+            bag.Add(waitStats);
         }
     }
 }
