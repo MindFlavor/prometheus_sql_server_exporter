@@ -61,7 +61,7 @@ namespace MindFlavor.SQLServerExporter.Counters
                 sb.Append("# TYPE sql_waiting_tasks_count gauge\n");
                 sb.Append(sbTasksCount);
 
-                sb.Append("# TYPE sql_wait_time_ms counter");
+                sb.Append("# TYPE sql_wait_time_ms counter\n");
                 sb.Append(sbWaitTimeMS);
 
                 return sb.ToString();
