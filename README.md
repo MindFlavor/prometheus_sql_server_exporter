@@ -69,7 +69,7 @@ The exporter right now exports:
 * [sys.dm_os_performance_counters](https://docs.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-views/sys-dm-os-performance-counters-transact-sql)
 * [sys.dm_os_schedulers](https://docs.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-views/sys-dm-os-schedulers-transact-sql)
 
-The exports are somewhat changed from the bare table to make them more suitable for Prometheus. For example, the schedulers export the parent node, scheduler id and cpu id ad parameters, like this:
+The exports are somewhat changed from the bare table to make them more suitable for Prometheus. For example, the schedulers export the parent node, scheduler id and cpu id as parameters, like this:
 
 ```
 sql_os_schedulers_active_workers_count{instance="FRCOGNOWIN10\SQL17", parent_node_id="0", scheduler_id="6", cpu_id="6"} 9
