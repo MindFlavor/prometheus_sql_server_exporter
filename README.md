@@ -1,6 +1,12 @@
 # Prometheus SQL Server exporter
 
-A prometheus exporter for the vital signs of Microsoft SQL Server instances
+![](https://img.shields.io/github/license/mindflavor/prometheus_sql_server_exporter.svg)
+![](https://img.shields.io/github/release/mindflavor/prometheus_sql_server_exporter.svg)
+
+![](https://img.shields.io/github/commits-since/mindflavor/prometheus_sql_server_exporter/0.1.0.svg)
+![](https://img.shields.io/github/contributors/mindflavor/prometheus_sql_server_exporter.svg)
+
+> A prometheus exporter for the vital signs of Microsoft SQL Server instances
 
 ## Intro
 [Prometheus](https://prometheus.io) and [Grafana](https://grafana.com) make easy to create insight in time driven data. [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-2017) exports a lot of information but doesn't readily store and display it. Using this simple exporter you allow Prometheus to store SQL Server vital signs with no effort. The stored data can be used to create dashboards or alerts as usual with Prometheus/Grafana.
