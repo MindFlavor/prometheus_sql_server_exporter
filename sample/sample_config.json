@@ -1,0 +1,6 @@
+ {
+     "port": 9966,
+     "instances": [{
+         "connectionString": "Server=.\\SQL17;Trusted_Connection=True;"
+     }]
+ }

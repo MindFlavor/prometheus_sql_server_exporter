@@ -1,0 +1,588 @@
+﻿Access Methods,AU cleanup batches/sec,counter,AccessMethods_AUcleanupbatches_over_sec
+Access Methods,AU cleanups/sec,counter,AccessMethods_AUcleanups_over_sec
+Access Methods,By-reference Lob Create Count,gauge,AccessMethods_By_referenceLobCreateCount
+Access Methods,By-reference Lob Use Count,gauge,AccessMethods_By_referenceLobUseCount
+Access Methods,Count Lob Readahead,gauge,AccessMethods_CountLobReadahead
+Access Methods,Count Pull In Row,gauge,AccessMethods_CountPullInRow
+Access Methods,Count Push Off Row,gauge,AccessMethods_CountPushOffRow
+Access Methods,Deferred dropped AUs,gauge,AccessMethods_DeferreddroppedAUs
+Access Methods,Deferred Dropped rowsets,gauge,AccessMethods_DeferredDroppedrowsets
+Access Methods,Dropped rowset cleanups/sec,counter,AccessMethods_Droppedrowsetcleanups_over_sec
+Access Methods,Dropped rowsets skipped/sec,counter,AccessMethods_Droppedrowsetsskipped_over_sec
+Access Methods,Extent Deallocations/sec,counter,AccessMethods_ExtentDeallocations_over_sec
+Access Methods,Extents Allocated/sec,counter,AccessMethods_ExtentsAllocated_over_sec
+Access Methods,Failed AU cleanup batches/sec,counter,AccessMethods_FailedAUcleanupbatches_over_sec
+Access Methods,Failed leaf page cookie,gauge,AccessMethods_Failedleafpagecookie
+Access Methods,Failed tree page cookie,gauge,AccessMethods_Failedtreepagecookie
+Access Methods,Forwarded Records/sec,counter,AccessMethods_ForwardedRecords_over_sec
+Access Methods,FreeSpace Page Fetches/sec,counter,AccessMethods_FreeSpacePageFetches_over_sec
+Access Methods,FreeSpace Scans/sec,counter,AccessMethods_FreeSpaceScans_over_sec
+Access Methods,Full Scans/sec,counter,AccessMethods_FullScans_over_sec
+Access Methods,Index Searches/sec,counter,AccessMethods_IndexSearches_over_sec
+Access Methods,InSysXact waits/sec,counter,AccessMethods_InSysXactwaits_over_sec
+Access Methods,LobHandle Create Count,gauge,AccessMethods_LobHandleCreateCount
+Access Methods,LobHandle Destroy Count,gauge,AccessMethods_LobHandleDestroyCount
+Access Methods,LobSS Provider Create Count,gauge,AccessMethods_LobSSProviderCreateCount
+Access Methods,LobSS Provider Destroy Count,gauge,AccessMethods_LobSSProviderDestroyCount
+Access Methods,LobSS Provider Truncation Count,gauge,AccessMethods_LobSSProviderTruncationCount
+Access Methods,Mixed page allocations/sec,counter,AccessMethods_Mixedpageallocations_over_sec
+Access Methods,Page compression attempts/sec,counter,AccessMethods_Pagecompressionattempts_over_sec
+Access Methods,Page Deallocations/sec,counter,AccessMethods_PageDeallocations_over_sec
+Access Methods,Page Splits/sec,counter,AccessMethods_PageSplits_over_sec
+Access Methods,Pages Allocated/sec,counter,AccessMethods_PagesAllocated_over_sec
+Access Methods,Pages compressed/sec,counter,AccessMethods_Pagescompressed_over_sec
+Access Methods,Probe Scans/sec,counter,AccessMethods_ProbeScans_over_sec
+Access Methods,Range Scans/sec,counter,AccessMethods_RangeScans_over_sec
+Access Methods,Scan Point Revalidations/sec,counter,AccessMethods_ScanPointRevalidations_over_sec
+Access Methods,Skipped Ghosted Records/sec,counter,AccessMethods_SkippedGhostedRecords_over_sec
+Access Methods,Table Lock Escalations/sec,counter,AccessMethods_TableLockEscalations_over_sec
+Access Methods,Used leaf page cookie,gauge,AccessMethods_Usedleafpagecookie
+Access Methods,Used tree page cookie,gauge,AccessMethods_Usedtreepagecookie
+Access Methods,Workfiles Created/sec,counter,AccessMethods_WorkfilesCreated_over_sec
+Access Methods,Worktables Created/sec,counter,AccessMethods_WorktablesCreated_over_sec
+Access Methods,Worktables From Cache Base,gauge,AccessMethods_WorktablesFromCacheBase
+Access Methods,Worktables From Cache Ratio,gauge,AccessMethods_WorktablesFromCacheRatio
+Advanced Analytics,Predictions/sec,counter,AdvancedAnalytics_Predictions_over_sec
+Availability Replica,Bytes Received from Replica/sec,counter,AvailabilityReplica_BytesReceivedfromReplica_over_sec
+Availability Replica,Bytes Sent to Replica/sec,counter,AvailabilityReplica_BytesSenttoReplica_over_sec
+Availability Replica,Bytes Sent to Transport/sec,counter,AvailabilityReplica_BytesSenttoTransport_over_sec
+Availability Replica,Flow Control Time (ms/sec),counter,AvailabilityReplica_FlowControlTime_ms_over_sec
+Availability Replica,Flow Control/sec,counter,AvailabilityReplica_FlowControl_over_sec
+Availability Replica,Receives from Replica/sec,counter,AvailabilityReplica_ReceivesfromReplica_over_sec
+Availability Replica,Resent Messages/sec,counter,AvailabilityReplica_ResentMessages_over_sec
+Availability Replica,Sends to Replica/sec,counter,AvailabilityReplica_SendstoReplica_over_sec
+Availability Replica,Sends to Transport/sec,counter,AvailabilityReplica_SendstoTransport_over_sec
+Batch Resp Statistics,Batches >=000000ms & <000001ms,gauge,BatchRespStatistics_Batches_ge_000000ms_lt_000001ms
+Batch Resp Statistics,Batches >=000001ms & <000002ms,gauge,BatchRespStatistics_Batches_ge_000001ms_lt_000002ms
+Batch Resp Statistics,Batches >=000002ms & <000005ms,gauge,BatchRespStatistics_Batches_ge_000002ms_lt_000005ms
+Batch Resp Statistics,Batches >=000005ms & <000010ms,gauge,BatchRespStatistics_Batches_ge_000005ms_lt_000010ms
+Batch Resp Statistics,Batches >=000010ms & <000020ms,gauge,BatchRespStatistics_Batches_ge_000010ms_lt_000020ms
+Batch Resp Statistics,Batches >=000020ms & <000050ms,gauge,BatchRespStatistics_Batches_ge_000020ms_lt_000050ms
+Batch Resp Statistics,Batches >=000050ms & <000100ms,gauge,BatchRespStatistics_Batches_ge_000050ms_lt_000100ms
+Batch Resp Statistics,Batches >=000100ms & <000200ms,gauge,BatchRespStatistics_Batches_ge_000100ms_lt_000200ms
+Batch Resp Statistics,Batches >=000200ms & <000500ms,gauge,BatchRespStatistics_Batches_ge_000200ms_lt_000500ms
+Batch Resp Statistics,Batches >=000500ms & <001000ms,gauge,BatchRespStatistics_Batches_ge_000500ms_lt_001000ms
+Batch Resp Statistics,Batches >=001000ms & <002000ms,gauge,BatchRespStatistics_Batches_ge_001000ms_lt_002000ms
+Batch Resp Statistics,Batches >=002000ms & <005000ms,gauge,BatchRespStatistics_Batches_ge_002000ms_lt_005000ms
+Batch Resp Statistics,Batches >=005000ms & <010000ms,gauge,BatchRespStatistics_Batches_ge_005000ms_lt_010000ms
+Batch Resp Statistics,Batches >=010000ms & <020000ms,gauge,BatchRespStatistics_Batches_ge_010000ms_lt_020000ms
+Batch Resp Statistics,Batches >=020000ms & <050000ms,gauge,BatchRespStatistics_Batches_ge_020000ms_lt_050000ms
+Batch Resp Statistics,Batches >=050000ms & <100000ms,gauge,BatchRespStatistics_Batches_ge_050000ms_lt_100000ms
+Batch Resp Statistics,Batches >=100000ms,gauge,BatchRespStatistics_Batches_ge_100000ms
+Broker Activation,Stored Procedures Invoked/sec,counter,BrokerActivation_StoredProceduresInvoked_over_sec
+Broker Activation,Task Limit Reached,gauge,BrokerActivation_TaskLimitReached
+Broker Activation,Task Limit Reached/sec,counter,BrokerActivation_TaskLimitReached_over_sec
+Broker Activation,Tasks Aborted/sec,counter,BrokerActivation_TasksAborted_over_sec
+Broker Activation,Tasks Running,gauge,BrokerActivation_TasksRunning
+Broker Activation,Tasks Started/sec,counter,BrokerActivation_TasksStarted_over_sec
+Broker Statistics,Activation Errors Total,gauge,BrokerStatistics_ActivationErrorsTotal
+Broker Statistics,Broker Transaction Rollbacks,gauge,BrokerStatistics_BrokerTransactionRollbacks
+Broker Statistics,Corrupted Messages Total,gauge,BrokerStatistics_CorruptedMessagesTotal
+Broker Statistics,Dequeued TransmissionQ Msgs/sec,counter,BrokerStatistics_DequeuedTransmissionQMsgs_over_sec
+Broker Statistics,Dialog Timer Event Count,gauge,BrokerStatistics_DialogTimerEventCount
+Broker Statistics,Dropped Messages Total,gauge,BrokerStatistics_DroppedMessagesTotal
+Broker Statistics,Enqueued Local Messages Total,gauge,BrokerStatistics_EnqueuedLocalMessagesTotal
+Broker Statistics,Enqueued Local Messages/sec,counter,BrokerStatistics_EnqueuedLocalMessages_over_sec
+Broker Statistics,Enqueued Messages Total,gauge,BrokerStatistics_EnqueuedMessagesTotal
+Broker Statistics,Enqueued Messages/sec,counter,BrokerStatistics_EnqueuedMessages_over_sec
+Broker Statistics,Enqueued P1 Messages/sec,counter,BrokerStatistics_EnqueuedP1Messages_over_sec
+Broker Statistics,Enqueued P10 Messages/sec,counter,BrokerStatistics_EnqueuedP10Messages_over_sec
+Broker Statistics,Enqueued P2 Messages/sec,counter,BrokerStatistics_EnqueuedP2Messages_over_sec
+Broker Statistics,Enqueued P3 Messages/sec,counter,BrokerStatistics_EnqueuedP3Messages_over_sec
+Broker Statistics,Enqueued P4 Messages/sec,counter,BrokerStatistics_EnqueuedP4Messages_over_sec
+Broker Statistics,Enqueued P5 Messages/sec,counter,BrokerStatistics_EnqueuedP5Messages_over_sec
+Broker Statistics,Enqueued P6 Messages/sec,counter,BrokerStatistics_EnqueuedP6Messages_over_sec
+Broker Statistics,Enqueued P7 Messages/sec,counter,BrokerStatistics_EnqueuedP7Messages_over_sec
+Broker Statistics,Enqueued P8 Messages/sec,counter,BrokerStatistics_EnqueuedP8Messages_over_sec
+Broker Statistics,Enqueued P9 Messages/sec,counter,BrokerStatistics_EnqueuedP9Messages_over_sec
+Broker Statistics,Enqueued TransmissionQ Msgs/sec,counter,BrokerStatistics_EnqueuedTransmissionQMsgs_over_sec
+Broker Statistics,Enqueued Transport Msg Frag Tot,gauge,BrokerStatistics_EnqueuedTransportMsgFragTot
+Broker Statistics,Enqueued Transport Msg Frags/sec,counter,BrokerStatistics_EnqueuedTransportMsgFrags_over_sec
+Broker Statistics,Enqueued Transport Msgs Total,gauge,BrokerStatistics_EnqueuedTransportMsgsTotal
+Broker Statistics,Enqueued Transport Msgs/sec,counter,BrokerStatistics_EnqueuedTransportMsgs_over_sec
+Broker Statistics,Forwarded Messages Total,gauge,BrokerStatistics_ForwardedMessagesTotal
+Broker Statistics,Forwarded Messages/sec,counter,BrokerStatistics_ForwardedMessages_over_sec
+Broker Statistics,Forwarded Msg Byte Total,gauge,BrokerStatistics_ForwardedMsgByteTotal
+Broker Statistics,Forwarded Msg Bytes/sec,counter,BrokerStatistics_ForwardedMsgBytes_over_sec
+Broker Statistics,Forwarded Msg Discarded Total,gauge,BrokerStatistics_ForwardedMsgDiscardedTotal
+Broker Statistics,Forwarded Msgs Discarded/sec,counter,BrokerStatistics_ForwardedMsgsDiscarded_over_sec
+Broker Statistics,Forwarded Pending Msg Bytes,gauge,BrokerStatistics_ForwardedPendingMsgBytes
+Broker Statistics,Forwarded Pending Msg Count,gauge,BrokerStatistics_ForwardedPendingMsgCount
+Broker Statistics,SQL RECEIVE Total,gauge,BrokerStatistics_SQLRECEIVETotal
+Broker Statistics,SQL RECEIVEs/sec,counter,BrokerStatistics_SQLRECEIVEs_over_sec
+Broker Statistics,SQL SEND Total,gauge,BrokerStatistics_SQLSENDTotal
+Broker Statistics,SQL SENDs/sec,counter,BrokerStatistics_SQLSENDs_over_sec
+Broker TO Statistics,Avg. Length of Batched Writes,gauge,BrokerTOStatistics_Avg_LengthofBatchedWrites
+Broker TO Statistics,Avg. Length of Batched Writes BS,gauge,BrokerTOStatistics_Avg_LengthofBatchedWritesBS
+Broker TO Statistics,Avg. Time Between Batches (ms),gauge,BrokerTOStatistics_Avg_TimeBetweenBatches_ms
+Broker TO Statistics,Avg. Time Between Batches Base,gauge,BrokerTOStatistics_Avg_TimeBetweenBatchesBase
+Broker TO Statistics,Avg. Time to Write Batch (ms),gauge,BrokerTOStatistics_Avg_TimetoWriteBatch_ms
+Broker TO Statistics,Avg. Time to Write Batch Base,gauge,BrokerTOStatistics_Avg_TimetoWriteBatchBase
+Broker TO Statistics,Transmission Obj Gets/Sec,counter,BrokerTOStatistics_TransmissionObjGets_over_Sec
+Broker TO Statistics,Transmission Obj Set Dirty/Sec,counter,BrokerTOStatistics_TransmissionObjSetDirty_over_Sec
+Broker TO Statistics,Transmission Obj Writes/Sec,counter,BrokerTOStatistics_TransmissionObjWrites_over_Sec
+Broker/DBM Transport,Current Bytes for Recv I/O,gauge,Broker_over_DBMTransport_CurrentBytesforRecvI_over_O
+Broker/DBM Transport,Current Bytes for Send I/O,gauge,Broker_over_DBMTransport_CurrentBytesforSendI_over_O
+Broker/DBM Transport,Current Msg Frags for Send I/O,gauge,Broker_over_DBMTransport_CurrentMsgFragsforSendI_over_O
+Broker/DBM Transport,Decrypted I/O bytes/sec,counter,Broker_over_DBMTransport_DecryptedI_over_Obytes_over_sec
+Broker/DBM Transport,Decryption I/Os/sec,counter,Broker_over_DBMTransport_DecryptionI_over_Os_over_sec
+Broker/DBM Transport,Encrypted I/O bytes/sec,counter,Broker_over_DBMTransport_EncryptedI_over_Obytes_over_sec
+Broker/DBM Transport,Encryption I/Os/sec,counter,Broker_over_DBMTransport_EncryptionI_over_Os_over_sec
+Broker/DBM Transport,Message Fragment P1 Sends/sec,counter,Broker_over_DBMTransport_MessageFragmentP1Sends_over_sec
+Broker/DBM Transport,Message Fragment P10 Sends/sec,counter,Broker_over_DBMTransport_MessageFragmentP10Sends_over_sec
+Broker/DBM Transport,Message Fragment P2 Sends/sec,counter,Broker_over_DBMTransport_MessageFragmentP2Sends_over_sec
+Broker/DBM Transport,Message Fragment P3 Sends/sec,counter,Broker_over_DBMTransport_MessageFragmentP3Sends_over_sec
+Broker/DBM Transport,Message Fragment P4 Sends/sec,counter,Broker_over_DBMTransport_MessageFragmentP4Sends_over_sec
+Broker/DBM Transport,Message Fragment P5 Sends/sec,counter,Broker_over_DBMTransport_MessageFragmentP5Sends_over_sec
+Broker/DBM Transport,Message Fragment P6 Sends/sec,counter,Broker_over_DBMTransport_MessageFragmentP6Sends_over_sec
+Broker/DBM Transport,Message Fragment P7 Sends/sec,counter,Broker_over_DBMTransport_MessageFragmentP7Sends_over_sec
+Broker/DBM Transport,Message Fragment P8 Sends/sec,counter,Broker_over_DBMTransport_MessageFragmentP8Sends_over_sec
+Broker/DBM Transport,Message Fragment P9 Sends/sec,counter,Broker_over_DBMTransport_MessageFragmentP9Sends_over_sec
+Broker/DBM Transport,Message Fragment Receives/sec,counter,Broker_over_DBMTransport_MessageFragmentReceives_over_sec
+Broker/DBM Transport,Message Fragment Sends/sec,counter,Broker_over_DBMTransport_MessageFragmentSends_over_sec
+Broker/DBM Transport,Msg Fragment Recv Size Avg,gauge,Broker_over_DBMTransport_MsgFragmentRecvSizeAvg
+Broker/DBM Transport,Msg Fragment Recv Size Avg Base,gauge,Broker_over_DBMTransport_MsgFragmentRecvSizeAvgBase
+Broker/DBM Transport,Msg Fragment Send Size Avg,gauge,Broker_over_DBMTransport_MsgFragmentSendSizeAvg
+Broker/DBM Transport,Msg Fragment Send Size Avg Base,gauge,Broker_over_DBMTransport_MsgFragmentSendSizeAvgBase
+Broker/DBM Transport,Open Connection Count,gauge,Broker_over_DBMTransport_OpenConnectionCount
+Broker/DBM Transport,Pending Bytes for Recv I/O,gauge,Broker_over_DBMTransport_PendingBytesforRecvI_over_O
+Broker/DBM Transport,Pending Bytes for Send I/O,gauge,Broker_over_DBMTransport_PendingBytesforSendI_over_O
+Broker/DBM Transport,Pending Msg Frags for Recv I/O,gauge,Broker_over_DBMTransport_PendingMsgFragsforRecvI_over_O
+Broker/DBM Transport,Pending Msg Frags for Send I/O,gauge,Broker_over_DBMTransport_PendingMsgFragsforSendI_over_O
+Broker/DBM Transport,Receive Flow Control Enters/sec,counter,Broker_over_DBMTransport_ReceiveFlowControlEnters_over_sec
+Broker/DBM Transport,Receive Flow Control Exits/sec,counter,Broker_over_DBMTransport_ReceiveFlowControlExits_over_sec
+Broker/DBM Transport,Receive Flow Control Gate,gauge,Broker_over_DBMTransport_ReceiveFlowControlGate
+Broker/DBM Transport,Receive I/O bytes/sec,counter,Broker_over_DBMTransport_ReceiveI_over_Obytes_over_sec
+Broker/DBM Transport,Receive I/O Len Avg,gauge,Broker_over_DBMTransport_ReceiveI_over_OLenAvg
+Broker/DBM Transport,Receive I/O Len Avg Base,gauge,Broker_over_DBMTransport_ReceiveI_over_OLenAvgBase
+Broker/DBM Transport,Receive I/Os/sec,counter,Broker_over_DBMTransport_ReceiveI_over_Os_over_sec
+Broker/DBM Transport,Recv I/O Buffer Copies bytes/sec,counter,Broker_over_DBMTransport_RecvI_over_OBufferCopiesbytes_over_sec
+Broker/DBM Transport,Recv I/O Buffer Copies Count,gauge,Broker_over_DBMTransport_RecvI_over_OBufferCopiesCount
+Broker/DBM Transport,Send Flow Control Enters/sec,counter,Broker_over_DBMTransport_SendFlowControlEnters_over_sec
+Broker/DBM Transport,Send Flow Control Exits/sec,counter,Broker_over_DBMTransport_SendFlowControlExits_over_sec
+Broker/DBM Transport,Send Flow Control Gate,gauge,Broker_over_DBMTransport_SendFlowControlGate
+Broker/DBM Transport,Send I/O bytes/sec,counter,Broker_over_DBMTransport_SendI_over_Obytes_over_sec
+Broker/DBM Transport,Send I/O Len Avg,gauge,Broker_over_DBMTransport_SendI_over_OLenAvg
+Broker/DBM Transport,Send I/O Len Avg Base,gauge,Broker_over_DBMTransport_SendI_over_OLenAvgBase
+Broker/DBM Transport,Send I/Os/sec,counter,Broker_over_DBMTransport_SendI_over_Os_over_sec
+Buffer Manager,Background writer pages/sec,counter,BufferManager_Backgroundwriterpages_over_sec
+Buffer Manager,Buffer cache hit ratio,gauge,BufferManager_Buffercachehitratio
+Buffer Manager,Buffer cache hit ratio base,gauge,BufferManager_Buffercachehitratiobase
+Buffer Manager,Checkpoint pages/sec,counter,BufferManager_Checkpointpages_over_sec
+Buffer Manager,Database pages,gauge,BufferManager_Databasepages
+Buffer Manager,Extension allocated pages,gauge,BufferManager_Extensionallocatedpages
+Buffer Manager,Extension free pages,gauge,BufferManager_Extensionfreepages
+Buffer Manager,Extension in use as percentage,gauge,BufferManager_Extensioninuseaspercentage
+Buffer Manager,Extension outstanding IO counter,gauge,BufferManager_ExtensionoutstandingIOcounter
+Buffer Manager,Extension page evictions/sec,counter,BufferManager_Extensionpageevictions_over_sec
+Buffer Manager,Extension page reads/sec,counter,BufferManager_Extensionpagereads_over_sec
+Buffer Manager,Extension page unreferenced time,gauge,BufferManager_Extensionpageunreferencedtime
+Buffer Manager,Extension page writes/sec,counter,BufferManager_Extensionpagewrites_over_sec
+Buffer Manager,Free list stalls/sec,counter,BufferManager_Freeliststalls_over_sec
+Buffer Manager,Integral Controller Slope,gauge,BufferManager_IntegralControllerSlope
+Buffer Manager,Lazy writes/sec,counter,BufferManager_Lazywrites_over_sec
+Buffer Manager,Page life expectancy,gauge,BufferManager_Pagelifeexpectancy
+Buffer Manager,Page lookups/sec,counter,BufferManager_Pagelookups_over_sec
+Buffer Manager,Page reads/sec,counter,BufferManager_Pagereads_over_sec
+Buffer Manager,Page writes/sec,counter,BufferManager_Pagewrites_over_sec
+Buffer Manager,Readahead pages/sec,counter,BufferManager_Readaheadpages_over_sec
+Buffer Manager,Readahead time/sec,counter,BufferManager_Readaheadtime_over_sec
+Buffer Manager,Target pages,gauge,BufferManager_Targetpages
+Buffer Node,Database pages,gauge,BufferNode_Databasepages
+Buffer Node,Local node page lookups/sec,counter,BufferNode_Localnodepagelookups_over_sec
+Buffer Node,Page life expectancy,gauge,BufferNode_Pagelifeexpectancy
+Buffer Node,Remote node page lookups/sec,counter,BufferNode_Remotenodepagelookups_over_sec
+Catalog Metadata,Cache Entries Count,gauge,CatalogMetadata_CacheEntriesCount
+Catalog Metadata,Cache Entries Pinned Count,gauge,CatalogMetadata_CacheEntriesPinnedCount
+Catalog Metadata,Cache Hit Ratio,gauge,CatalogMetadata_CacheHitRatio
+Catalog Metadata,Cache Hit Ratio Base,gauge,CatalogMetadata_CacheHitRatioBase
+CLR,CLR Execution,gauge,CLR_CLRExecution
+Columnstore,Delta Rowgroups Closed,gauge,Columnstore_DeltaRowgroupsClosed
+Columnstore,Delta Rowgroups Compressed,gauge,Columnstore_DeltaRowgroupsCompressed
+Columnstore,Delta Rowgroups Created,gauge,Columnstore_DeltaRowgroupsCreated
+Columnstore,Segment Cache Hit Ratio,gauge,Columnstore_SegmentCacheHitRatio
+Columnstore,Segment Cache Hit Ratio Base,gauge,Columnstore_SegmentCacheHitRatioBase
+Columnstore,Segment Reads/Sec,counter,Columnstore_SegmentReads_over_Sec
+Columnstore,Total Delete Buffers Migrated,gauge,Columnstore_TotalDeleteBuffersMigrated
+Columnstore,Total Merge Policy Evaluations,gauge,Columnstore_TotalMergePolicyEvaluations
+Columnstore,Total Rowgroups Compressed,gauge,Columnstore_TotalRowgroupsCompressed
+Columnstore,Total Rowgroups Fit For Merge,gauge,Columnstore_TotalRowgroupsFitForMerge
+Columnstore,Total Rowgroups Merge Compressed,gauge,Columnstore_TotalRowgroupsMergeCompressed
+Columnstore,Total Source Rowgroups Merged,gauge,Columnstore_TotalSourceRowgroupsMerged
+Cursor Manager by Type,Active cursors,gauge,CursorManagerbyType_Activecursors
+Cursor Manager by Type,Cache Hit Ratio,gauge,CursorManagerbyType_CacheHitRatio
+Cursor Manager by Type,Cache Hit Ratio Base,gauge,CursorManagerbyType_CacheHitRatioBase
+Cursor Manager by Type,Cached Cursor Counts,gauge,CursorManagerbyType_CachedCursorCounts
+Cursor Manager by Type,Cursor Cache Use Counts/sec,counter,CursorManagerbyType_CursorCacheUseCounts_over_sec
+Cursor Manager by Type,Cursor memory usage,gauge,CursorManagerbyType_Cursormemoryusage
+Cursor Manager by Type,Cursor Requests/sec,counter,CursorManagerbyType_CursorRequests_over_sec
+Cursor Manager by Type,Cursor worktable usage,gauge,CursorManagerbyType_Cursorworktableusage
+Cursor Manager by Type,Number of active cursor plans,gauge,CursorManagerbyType_Numberofactivecursorplans
+Cursor Manager Total,Async population count,gauge,CursorManagerTotal_Asyncpopulationcount
+Cursor Manager Total,Cursor conversion rate,gauge,CursorManagerTotal_Cursorconversionrate
+Cursor Manager Total,Cursor flushes,gauge,CursorManagerTotal_Cursorflushes
+Database Replica,Database Flow Control Delay,gauge,DatabaseReplica_DatabaseFlowControlDelay
+Database Replica,Database Flow Controls/sec,counter,DatabaseReplica_DatabaseFlowControls_over_sec
+Database Replica,File Bytes Received/sec,counter,DatabaseReplica_FileBytesReceived_over_sec
+Database Replica,Group Commit Time,gauge,DatabaseReplica_GroupCommitTime
+Database Replica,Group Commits/Sec,counter,DatabaseReplica_GroupCommits_over_Sec
+Database Replica,Log Apply Pending Queue,gauge,DatabaseReplica_LogApplyPendingQueue
+Database Replica,Log Apply Ready Queue,gauge,DatabaseReplica_LogApplyReadyQueue
+Database Replica,Log Bytes Compressed/sec,counter,DatabaseReplica_LogBytesCompressed_over_sec
+Database Replica,Log Bytes Decompressed/sec,counter,DatabaseReplica_LogBytesDecompressed_over_sec
+Database Replica,Log Bytes Received/sec,counter,DatabaseReplica_LogBytesReceived_over_sec
+Database Replica,Log Compression Cache hits/sec,counter,DatabaseReplica_LogCompressionCachehits_over_sec
+Database Replica,Log Compression Cache misses/sec,counter,DatabaseReplica_LogCompressionCachemisses_over_sec
+Database Replica,Log Compressions/sec,counter,DatabaseReplica_LogCompressions_over_sec
+Database Replica,Log Decompressions/sec,counter,DatabaseReplica_LogDecompressions_over_sec
+Database Replica,Log remaining for undo,gauge,DatabaseReplica_Logremainingforundo
+Database Replica,Log Send Queue,gauge,DatabaseReplica_LogSendQueue
+Database Replica,Mirrored Write Transactions/sec,counter,DatabaseReplica_MirroredWriteTransactions_over_sec
+Database Replica,Recovery Queue,gauge,DatabaseReplica_RecoveryQueue
+Database Replica,Redo blocked/sec,counter,DatabaseReplica_Redoblocked_over_sec
+Database Replica,Redo Bytes Remaining,gauge,DatabaseReplica_RedoBytesRemaining
+Database Replica,Redone Bytes/sec,counter,DatabaseReplica_RedoneBytes_over_sec
+Database Replica,Redones/sec,counter,DatabaseReplica_Redones_over_sec
+Database Replica,Total Log requiring undo,gauge,DatabaseReplica_TotalLogrequiringundo
+Database Replica,Transaction Delay,gauge,DatabaseReplica_TransactionDelay
+Databases,Active Transactions,gauge,Databases_ActiveTransactions
+Databases,Avg Dist From EOL/LP Request,gauge,Databases_AvgDistFromEOL_over_LPRequest
+Databases,Backup/Restore Throughput/sec,counter,Databases_Backup_over_RestoreThroughput_over_sec
+Databases,Bulk Copy Rows/sec,counter,Databases_BulkCopyRows_over_sec
+Databases,Bulk Copy Throughput/sec,counter,Databases_BulkCopyThroughput_over_sec
+Databases,Commit table entries,gauge,Databases_Committableentries
+Databases,Data File(s) Size (KB),gauge,Databases_DataFile_s_Size_KB
+Databases,DBCC Logical Scan Bytes/sec,counter,Databases_DBCCLogicalScanBytes_over_sec
+Databases,Group Commit Time/sec,counter,Databases_GroupCommitTime_over_sec
+Databases,Log Bytes Flushed/sec,counter,Databases_LogBytesFlushed_over_sec
+Databases,Log Cache Hit Ratio,gauge,Databases_LogCacheHitRatio
+Databases,Log Cache Hit Ratio Base,gauge,Databases_LogCacheHitRatioBase
+Databases,Log Cache Reads/sec,counter,Databases_LogCacheReads_over_sec
+Databases,Log File(s) Size (KB),gauge,Databases_LogFile_s_Size_KB
+Databases,Log File(s) Used Size (KB),gauge,Databases_LogFile_s_UsedSize_KB
+Databases,Log Flush Wait Time,gauge,Databases_LogFlushWaitTime
+Databases,Log Flush Waits/sec,counter,Databases_LogFlushWaits_over_sec
+Databases,Log Flush Write Time (ms),gauge,Databases_LogFlushWriteTime_ms
+Databases,Log Flushes/sec,counter,Databases_LogFlushes_over_sec
+Databases,Log Growths,gauge,Databases_LogGrowths
+Databases,Log Pool Cache Misses/sec,counter,Databases_LogPoolCacheMisses_over_sec
+Databases,Log Pool Disk Reads/sec,counter,Databases_LogPoolDiskReads_over_sec
+Databases,Log Pool Hash Deletes/sec,counter,Databases_LogPoolHashDeletes_over_sec
+Databases,Log Pool Hash Inserts/sec,counter,Databases_LogPoolHashInserts_over_sec
+Databases,Log Pool Invalid Hash Entry/sec,counter,Databases_LogPoolInvalidHashEntry_over_sec
+Databases,Log Pool Log Scan Pushes/sec,counter,Databases_LogPoolLogScanPushes_over_sec
+Databases,Log Pool LogWriter Pushes/sec,counter,Databases_LogPoolLogWriterPushes_over_sec
+Databases,Log Pool Push Empty FreePool/sec,counter,Databases_LogPoolPushEmptyFreePool_over_sec
+Databases,Log Pool Push Low Memory/sec,counter,Databases_LogPoolPushLowMemory_over_sec
+Databases,Log Pool Push No Free Buffer/sec,counter,Databases_LogPoolPushNoFreeBuffer_over_sec
+Databases,Log Pool Req. Behind Trunc/sec,counter,Databases_LogPoolReq_BehindTrunc_over_sec
+Databases,Log Pool Requests Base,gauge,Databases_LogPoolRequestsBase
+Databases,Log Pool Requests Old VLF/sec,counter,Databases_LogPoolRequestsOldVLF_over_sec
+Databases,Log Pool Requests/sec,counter,Databases_LogPoolRequests_over_sec
+Databases,Log Pool Total Active Log Size,gauge,Databases_LogPoolTotalActiveLogSize
+Databases,Log Pool Total Shared Pool Size,gauge,Databases_LogPoolTotalSharedPoolSize
+Databases,Log Shrinks,gauge,Databases_LogShrinks
+Databases,Log Truncations,gauge,Databases_LogTruncations
+Databases,Percent Log Used,gauge,Databases_PercentLogUsed
+Databases,Repl. Pending Xacts,gauge,Databases_Repl_PendingXacts
+Databases,Repl. Trans. Rate,gauge,Databases_Repl_Trans_Rate
+Databases,Shrink Data Movement Bytes/sec,counter,Databases_ShrinkDataMovementBytes_over_sec
+Databases,Tracked transactions/sec,counter,Databases_Trackedtransactions_over_sec
+Databases,Transactions/sec,counter,Databases_Transactions_over_sec
+Databases,Write Transactions/sec,counter,Databases_WriteTransactions_over_sec
+Databases,XTP Controller DLC Latency Base,gauge,Databases_XTPControllerDLCLatencyBase
+Databases,XTP Controller DLC Latency/Fetch,gauge,Databases_XTPControllerDLCLatency_over_Fetch
+Databases,XTP Controller DLC Peak Latency,gauge,Databases_XTPControllerDLCPeakLatency
+Databases,XTP Controller Log Processed/sec,counter,Databases_XTPControllerLogProcessed_over_sec
+Databases,XTP Memory Used (KB),gauge,Databases_XTPMemoryUsed_KB
+Deprecated Features,Usage,gauge,DeprecatedFeatures_Usage
+Exec Statistics,Distributed Query,gauge,ExecStatistics_DistributedQuery
+Exec Statistics,DTC calls,gauge,ExecStatistics_DTCcalls
+Exec Statistics,Extended Procedures,gauge,ExecStatistics_ExtendedProcedures
+Exec Statistics,OLEDB calls,gauge,ExecStatistics_OLEDBcalls
+External Scripts,Execution Errors,gauge,ExternalScripts_ExecutionErrors
+External Scripts,Implied Auth. Logins,gauge,ExternalScripts_ImpliedAuth_Logins
+External Scripts,Parallel Executions,gauge,ExternalScripts_ParallelExecutions
+External Scripts,SQL CC Executions,gauge,ExternalScripts_SQLCCExecutions
+External Scripts,Streaming Executions,gauge,ExternalScripts_StreamingExecutions
+External Scripts,Total Execution Time (ms),gauge,ExternalScripts_TotalExecutionTime_ms
+External Scripts,Total Executions,gauge,ExternalScripts_TotalExecutions
+FileTable,Avg time delete FileTable item,gauge,FileTable_AvgtimedeleteFileTableitem
+FileTable,Avg time FileTable enumeration,gauge,FileTable_AvgtimeFileTableenumeration
+FileTable,Avg time FileTable handle kill,gauge,FileTable_AvgtimeFileTablehandlekill
+FileTable,Avg time move FileTable item,gauge,FileTable_AvgtimemoveFileTableitem
+FileTable,Avg time per file I/O request,gauge,FileTable_AvgtimeperfileI_over_Orequest
+FileTable,Avg time per file I/O response,gauge,FileTable_AvgtimeperfileI_over_Oresponse
+FileTable,Avg time rename FileTable item,gauge,FileTable_AvgtimerenameFileTableitem
+FileTable,Avg time to get FileTable item,gauge,FileTable_AvgtimetogetFileTableitem
+FileTable,Avg time update FileTable item,gauge,FileTable_AvgtimeupdateFileTableitem
+FileTable,FileTable db operations/sec,counter,FileTable_FileTabledboperations_over_sec
+FileTable,FileTable enumeration reqs/sec,counter,FileTable_FileTableenumerationreqs_over_sec
+FileTable,FileTable file I/O requests/sec,counter,FileTable_FileTablefileI_over_Orequests_over_sec
+FileTable,FileTable file I/O response/sec,counter,FileTable_FileTablefileI_over_Oresponse_over_sec
+FileTable,FileTable item delete reqs/sec,counter,FileTable_FileTableitemdeletereqs_over_sec
+FileTable,FileTable item get requests/sec,counter,FileTable_FileTableitemgetrequests_over_sec
+FileTable,FileTable item move reqs/sec,counter,FileTable_FileTableitemmovereqs_over_sec
+FileTable,FileTable item rename reqs/sec,counter,FileTable_FileTableitemrenamereqs_over_sec
+FileTable,FileTable item update reqs/sec,counter,FileTable_FileTableitemupdatereqs_over_sec
+FileTable,FileTable kill handle ops/sec,counter,FileTable_FileTablekillhandleops_over_sec
+FileTable,FileTable table operations/sec,counter,FileTable_FileTabletableoperations_over_sec
+FileTable,Time delete FileTable item BASE,gauge,FileTable_TimedeleteFileTableitemBASE
+FileTable,Time FileTable enumeration BASE,gauge,FileTable_TimeFileTableenumerationBASE
+FileTable,Time FileTable handle kill BASE,gauge,FileTable_TimeFileTablehandlekillBASE
+FileTable,Time move FileTable item BASE,gauge,FileTable_TimemoveFileTableitemBASE
+FileTable,Time per file I/O request BASE,gauge,FileTable_TimeperfileI_over_OrequestBASE
+FileTable,Time per file I/O response BASE,gauge,FileTable_TimeperfileI_over_OresponseBASE
+FileTable,Time rename FileTable item BASE,gauge,FileTable_TimerenameFileTableitemBASE
+FileTable,Time to get FileTable item BASE,gauge,FileTable_TimetogetFileTableitemBASE
+FileTable,Time update FileTable item BASE,gauge,FileTable_TimeupdateFileTableitemBASE
+General Statistics,Active Temp Tables,gauge,GeneralStatistics_ActiveTempTables
+General Statistics,Connection Reset/sec,counter,GeneralStatistics_ConnectionReset_over_sec
+General Statistics,Event Notifications Delayed Drop,gauge,GeneralStatistics_EventNotificationsDelayedDrop
+General Statistics,HTTP Authenticated Requests,gauge,GeneralStatistics_HTTPAuthenticatedRequests
+General Statistics,Logical Connections,gauge,GeneralStatistics_LogicalConnections
+General Statistics,Logins/sec,counter,GeneralStatistics_Logins_over_sec
+General Statistics,Logouts/sec,counter,GeneralStatistics_Logouts_over_sec
+General Statistics,Mars Deadlocks,gauge,GeneralStatistics_MarsDeadlocks
+General Statistics,Non-atomic yield rate,gauge,GeneralStatistics_Non_atomicyieldrate
+General Statistics,Processes blocked,gauge,GeneralStatistics_Processesblocked
+General Statistics,SOAP Empty Requests,gauge,GeneralStatistics_SOAPEmptyRequests
+General Statistics,SOAP Method Invocations,gauge,GeneralStatistics_SOAPMethodInvocations
+General Statistics,SOAP Session Initiate Requests,gauge,GeneralStatistics_SOAPSessionInitiateRequests
+General Statistics,SOAP Session Terminate Requests,gauge,GeneralStatistics_SOAPSessionTerminateRequests
+General Statistics,SOAP SQL Requests,gauge,GeneralStatistics_SOAPSQLRequests
+General Statistics,SOAP WSDL Requests,gauge,GeneralStatistics_SOAPWSDLRequests
+General Statistics,SQL Trace IO Provider Lock Waits,gauge,GeneralStatistics_SQLTraceIOProviderLockWaits
+General Statistics,Temp Tables Creation Rate,gauge,GeneralStatistics_TempTablesCreationRate
+General Statistics,Temp Tables For Destruction,gauge,GeneralStatistics_TempTablesForDestruction
+General Statistics,Tempdb recovery unit id,gauge,GeneralStatistics_Tempdbrecoveryunitid
+General Statistics,Tempdb rowset id,gauge,GeneralStatistics_Tempdbrowsetid
+General Statistics,Trace Event Notification Queue,gauge,GeneralStatistics_TraceEventNotificationQueue
+General Statistics,Transactions,gauge,GeneralStatistics_Transactions
+General Statistics,User Connections,gauge,GeneralStatistics_UserConnections
+HTTP Storage,Avg. Bytes/Read,gauge,HTTPStorage_Avg_Bytes_over_Read
+HTTP Storage,Avg. Bytes/Read BASE,gauge,HTTPStorage_Avg_Bytes_over_ReadBASE
+HTTP Storage,Avg. Bytes/Transfer,gauge,HTTPStorage_Avg_Bytes_over_Transfer
+HTTP Storage,Avg. Bytes/Transfer BASE,gauge,HTTPStorage_Avg_Bytes_over_TransferBASE
+HTTP Storage,Avg. Bytes/Write,gauge,HTTPStorage_Avg_Bytes_over_Write
+HTTP Storage,Avg. Bytes/Write BASE,gauge,HTTPStorage_Avg_Bytes_over_WriteBASE
+HTTP Storage,Avg. microsec/Read,gauge,HTTPStorage_Avg_microsec_over_Read
+HTTP Storage,Avg. microsec/Read BASE,gauge,HTTPStorage_Avg_microsec_over_ReadBASE
+HTTP Storage,Avg. microsec/Read Comp,gauge,HTTPStorage_Avg_microsec_over_ReadComp
+HTTP Storage,Avg. microsec/Read Comp BASE,gauge,HTTPStorage_Avg_microsec_over_ReadCompBASE
+HTTP Storage,Avg. microsec/Transfer,gauge,HTTPStorage_Avg_microsec_over_Transfer
+HTTP Storage,Avg. microsec/Transfer BASE,gauge,HTTPStorage_Avg_microsec_over_TransferBASE
+HTTP Storage,Avg. microsec/Write,gauge,HTTPStorage_Avg_microsec_over_Write
+HTTP Storage,Avg. microsec/Write BASE,gauge,HTTPStorage_Avg_microsec_over_WriteBASE
+HTTP Storage,Avg. microsec/Write Comp,gauge,HTTPStorage_Avg_microsec_over_WriteComp
+HTTP Storage,Avg. microsec/Write Comp BASE,gauge,HTTPStorage_Avg_microsec_over_WriteCompBASE
+HTTP Storage,HTTP Storage IO failed/sec,counter,HTTPStorage_HTTPStorageIOfailed_over_sec
+HTTP Storage,HTTP Storage IO retry/sec,counter,HTTPStorage_HTTPStorageIOretry_over_sec
+HTTP Storage,Outstanding HTTP Storage IO,gauge,HTTPStorage_OutstandingHTTPStorageIO
+HTTP Storage,Read Bytes/Sec,counter,HTTPStorage_ReadBytes_over_Sec
+HTTP Storage,Reads/Sec,counter,HTTPStorage_Reads_over_Sec
+HTTP Storage,Total Bytes/Sec,counter,HTTPStorage_TotalBytes_over_Sec
+HTTP Storage,Transfers/Sec,counter,HTTPStorage_Transfers_over_Sec
+HTTP Storage,Write Bytes/Sec,counter,HTTPStorage_WriteBytes_over_Sec
+HTTP Storage,Writes/Sec,counter,HTTPStorage_Writes_over_Sec
+Latches,Average Latch Wait Time (ms),gauge,Latches_AverageLatchWaitTime_ms
+Latches,Average Latch Wait Time Base,gauge,Latches_AverageLatchWaitTimeBase
+Latches,Latch Waits/sec,counter,Latches_LatchWaits_over_sec
+Latches,Number of SuperLatches,gauge,Latches_NumberofSuperLatches
+Latches,SuperLatch Demotions/sec,counter,Latches_SuperLatchDemotions_over_sec
+Latches,SuperLatch Promotions/sec,counter,Latches_SuperLatchPromotions_over_sec
+Latches,Total Latch Wait Time (ms),gauge,Latches_TotalLatchWaitTime_ms
+Locks,Average Wait Time (ms),gauge,Locks_AverageWaitTime_ms
+Locks,Average Wait Time Base,gauge,Locks_AverageWaitTimeBase
+Locks,Lock Requests/sec,counter,Locks_LockRequests_over_sec
+Locks,Lock Timeouts (timeout > 0)/sec,counter,Locks_LockTimeouts_timeout_gt_0__over_sec
+Locks,Lock Timeouts/sec,counter,Locks_LockTimeouts_over_sec
+Locks,Lock Wait Time (ms),gauge,Locks_LockWaitTime_ms
+Locks,Lock Waits/sec,counter,Locks_LockWaits_over_sec
+Locks,Number of Deadlocks/sec,counter,Locks_NumberofDeadlocks_over_sec
+LogPool FreePool,Free Buffer Refills/sec,counter,LogPoolFreePool_FreeBufferRefills_over_sec
+LogPool FreePool,Free List Length,gauge,LogPoolFreePool_FreeListLength
+Memory Broker Clerks,Internal benefit,gauge,MemoryBrokerClerks_Internalbenefit
+Memory Broker Clerks,Memory broker clerk size,gauge,MemoryBrokerClerks_Memorybrokerclerksize
+Memory Broker Clerks,Periodic evictions (pages),gauge,MemoryBrokerClerks_Periodicevictions_pages
+Memory Broker Clerks,Pressure evictions (pages/sec),counter,MemoryBrokerClerks_Pressureevictions_pages_over_sec
+Memory Broker Clerks,Simulation benefit,gauge,MemoryBrokerClerks_Simulationbenefit
+Memory Broker Clerks,Simulation size,gauge,MemoryBrokerClerks_Simulationsize
+Memory Manager,Connection Memory (KB),gauge,MemoryManager_ConnectionMemory_KB
+Memory Manager,Database Cache Memory (KB),gauge,MemoryManager_DatabaseCacheMemory_KB
+Memory Manager,External benefit of memory,gauge,MemoryManager_Externalbenefitofmemory
+Memory Manager,Free Memory (KB),gauge,MemoryManager_FreeMemory_KB
+Memory Manager,Granted Workspace Memory (KB),gauge,MemoryManager_GrantedWorkspaceMemory_KB
+Memory Manager,Lock Blocks,gauge,MemoryManager_LockBlocks
+Memory Manager,Lock Blocks Allocated,gauge,MemoryManager_LockBlocksAllocated
+Memory Manager,Lock Memory (KB),gauge,MemoryManager_LockMemory_KB
+Memory Manager,Lock Owner Blocks,gauge,MemoryManager_LockOwnerBlocks
+Memory Manager,Lock Owner Blocks Allocated,gauge,MemoryManager_LockOwnerBlocksAllocated
+Memory Manager,Log Pool Memory (KB),gauge,MemoryManager_LogPoolMemory_KB
+Memory Manager,Maximum Workspace Memory (KB),gauge,MemoryManager_MaximumWorkspaceMemory_KB
+Memory Manager,Memory Grants Outstanding,gauge,MemoryManager_MemoryGrantsOutstanding
+Memory Manager,Memory Grants Pending,gauge,MemoryManager_MemoryGrantsPending
+Memory Manager,Optimizer Memory (KB),gauge,MemoryManager_OptimizerMemory_KB
+Memory Manager,Reserved Server Memory (KB),gauge,MemoryManager_ReservedServerMemory_KB
+Memory Manager,SQL Cache Memory (KB),gauge,MemoryManager_SQLCacheMemory_KB
+Memory Manager,Stolen Server Memory (KB),gauge,MemoryManager_StolenServerMemory_KB
+Memory Manager,Target Server Memory (KB),gauge,MemoryManager_TargetServerMemory_KB
+Memory Manager,Total Server Memory (KB),gauge,MemoryManager_TotalServerMemory_KB
+Memory Node,Database Node Memory (KB),gauge,MemoryNode_DatabaseNodeMemory_KB
+Memory Node,Foreign Node Memory (KB),gauge,MemoryNode_ForeignNodeMemory_KB
+Memory Node,Free Node Memory (KB),gauge,MemoryNode_FreeNodeMemory_KB
+Memory Node,Stolen Node Memory (KB),gauge,MemoryNode_StolenNodeMemory_KB
+Memory Node,Target Node Memory (KB),gauge,MemoryNode_TargetNodeMemory_KB
+Memory Node,Total Node Memory (KB),gauge,MemoryNode_TotalNodeMemory_KB
+Plan Cache,Cache Hit Ratio,gauge,PlanCache_CacheHitRatio
+Plan Cache,Cache Hit Ratio Base,gauge,PlanCache_CacheHitRatioBase
+Plan Cache,Cache Object Counts,gauge,PlanCache_CacheObjectCounts
+Plan Cache,Cache Objects in use,gauge,PlanCache_CacheObjectsinuse
+Plan Cache,Cache Pages,gauge,PlanCache_CachePages
+Query Store,Query Store CPU usage,gauge,QueryStore_QueryStoreCPUusage
+Query Store,Query Store logical reads,gauge,QueryStore_QueryStorelogicalreads
+Query Store,Query Store logical writes,gauge,QueryStore_QueryStorelogicalwrites
+Query Store,Query Store physical reads,gauge,QueryStore_QueryStorephysicalreads
+Resource Pool Stats,Active memory grant amount (KB),gauge,ResourcePoolStats_Activememorygrantamount_KB
+Resource Pool Stats,Active memory grants count,gauge,ResourcePoolStats_Activememorygrantscount
+Resource Pool Stats,Avg Disk Read IO (ms),gauge,ResourcePoolStats_AvgDiskReadIO_ms
+Resource Pool Stats,Avg Disk Read IO (ms) Base,gauge,ResourcePoolStats_AvgDiskReadIO_ms_Base
+Resource Pool Stats,Avg Disk Write IO (ms),gauge,ResourcePoolStats_AvgDiskWriteIO_ms
+Resource Pool Stats,Avg Disk Write IO (ms) Base,gauge,ResourcePoolStats_AvgDiskWriteIO_ms_Base
+Resource Pool Stats,Cache memory target (KB),gauge,ResourcePoolStats_Cachememorytarget_KB
+Resource Pool Stats,Compile memory target (KB),gauge,ResourcePoolStats_Compilememorytarget_KB
+Resource Pool Stats,CPU control effect %,gauge,ResourcePoolStats_CPUcontroleffect_perc
+Resource Pool Stats,CPU delayed %,gauge,ResourcePoolStats_CPUdelayed_perc
+Resource Pool Stats,CPU delayed % base,gauge,ResourcePoolStats_CPUdelayed_perc_base
+Resource Pool Stats,CPU effective %,gauge,ResourcePoolStats_CPUeffective_perc
+Resource Pool Stats,CPU effective % base,gauge,ResourcePoolStats_CPUeffective_perc_base
+Resource Pool Stats,CPU usage %,gauge,ResourcePoolStats_CPUusage_perc
+Resource Pool Stats,CPU usage % base,gauge,ResourcePoolStats_CPUusage_perc_base
+Resource Pool Stats,CPU usage target %,gauge,ResourcePoolStats_CPUusagetarget_perc
+Resource Pool Stats,CPU violated %,gauge,ResourcePoolStats_CPUviolated_perc
+Resource Pool Stats,Disk Read Bytes/sec,counter,ResourcePoolStats_DiskReadBytes_over_sec
+Resource Pool Stats,Disk Read IO Throttled/sec,counter,ResourcePoolStats_DiskReadIOThrottled_over_sec
+Resource Pool Stats,Disk Read IO/sec,counter,ResourcePoolStats_DiskReadIO_over_sec
+Resource Pool Stats,Disk Write Bytes/sec,counter,ResourcePoolStats_DiskWriteBytes_over_sec
+Resource Pool Stats,Disk Write IO Throttled/sec,counter,ResourcePoolStats_DiskWriteIOThrottled_over_sec
+Resource Pool Stats,Disk Write IO/sec,counter,ResourcePoolStats_DiskWriteIO_over_sec
+Resource Pool Stats,Max memory (KB),gauge,ResourcePoolStats_Maxmemory_KB
+Resource Pool Stats,Memory grant timeouts/sec,counter,ResourcePoolStats_Memorygranttimeouts_over_sec
+Resource Pool Stats,Memory grants/sec,counter,ResourcePoolStats_Memorygrants_over_sec
+Resource Pool Stats,Pending memory grants count,gauge,ResourcePoolStats_Pendingmemorygrantscount
+Resource Pool Stats,Query exec memory target (KB),gauge,ResourcePoolStats_Queryexecmemorytarget_KB
+Resource Pool Stats,Target memory (KB),gauge,ResourcePoolStats_Targetmemory_KB
+Resource Pool Stats,Used memory (KB),gauge,ResourcePoolStats_Usedmemory_KB
+SQL Errors,Errors/sec,counter,SQLErrors_Errors_over_sec
+SQL Server 2017 XTP Cursors,Cursor deletes/sec,counter,SQLServer2017XTPCursors_Cursordeletes_over_sec
+SQL Server 2017 XTP Cursors,Cursor inserts/sec,counter,SQLServer2017XTPCursors_Cursorinserts_over_sec
+SQL Server 2017 XTP Cursors,Cursor scans started/sec,counter,SQLServer2017XTPCursors_Cursorscansstarted_over_sec
+SQL Server 2017 XTP Cursors,Cursor unique violations/sec,counter,SQLServer2017XTPCursors_Cursoruniqueviolations_over_sec
+SQL Server 2017 XTP Cursors,Cursor updates/sec,counter,SQLServer2017XTPCursors_Cursorupdates_over_sec
+SQL Server 2017 XTP Cursors,Cursor write conflicts/sec,counter,SQLServer2017XTPCursors_Cursorwriteconflicts_over_sec
+SQL Server 2017 XTP Cursors,Dusty corner scan retries/sec (user-issued),counter,SQLServer2017XTPCursors_Dustycornerscanretries_over_sec_user_issued
+SQL Server 2017 XTP Cursors,Expired rows removed/sec,counter,SQLServer2017XTPCursors_Expiredrowsremoved_over_sec
+SQL Server 2017 XTP Cursors,Expired rows touched/sec,counter,SQLServer2017XTPCursors_Expiredrowstouched_over_sec
+SQL Server 2017 XTP Cursors,Rows returned/sec,counter,SQLServer2017XTPCursors_Rowsreturned_over_sec
+SQL Server 2017 XTP Cursors,Rows touched/sec,counter,SQLServer2017XTPCursors_Rowstouched_over_sec
+SQL Server 2017 XTP Cursors,Tentatively-deleted rows touched/sec,counter,SQLServer2017XTPCursors_Tentatively_deletedrowstouched_over_sec
+SQL Server 2017 XTP Garbage Collection,Dusty corner scan retries/sec (GC-issued),counter,SQLServer2017XTPGarbageCollection_Dustycornerscanretries_over_sec_GC_issued
+SQL Server 2017 XTP Garbage Collection,Main GC work items/sec,counter,SQLServer2017XTPGarbageCollection_MainGCworkitems_over_sec
+SQL Server 2017 XTP Garbage Collection,Parallel GC work item/sec,counter,SQLServer2017XTPGarbageCollection_ParallelGCworkitem_over_sec
+SQL Server 2017 XTP Garbage Collection,Rows processed/sec,counter,SQLServer2017XTPGarbageCollection_Rowsprocessed_over_sec
+SQL Server 2017 XTP Garbage Collection,Rows processed/sec (first in bucket and removed),counter,SQLServer2017XTPGarbageCollection_Rowsprocessed_over_sec_firstinbucketandremoved
+SQL Server 2017 XTP Garbage Collection,Rows processed/sec (first in bucket),counter,SQLServer2017XTPGarbageCollection_Rowsprocessed_over_sec_firstinbucket
+SQL Server 2017 XTP Garbage Collection,Rows processed/sec (marked for unlink),counter,SQLServer2017XTPGarbageCollection_Rowsprocessed_over_sec_markedforunlink
+SQL Server 2017 XTP Garbage Collection,Rows processed/sec (no sweep needed),counter,SQLServer2017XTPGarbageCollection_Rowsprocessed_over_sec_nosweepneeded
+SQL Server 2017 XTP Garbage Collection,Sweep expired rows removed/sec,counter,SQLServer2017XTPGarbageCollection_Sweepexpiredrowsremoved_over_sec
+SQL Server 2017 XTP Garbage Collection,Sweep expired rows touched/sec,counter,SQLServer2017XTPGarbageCollection_Sweepexpiredrowstouched_over_sec
+SQL Server 2017 XTP Garbage Collection,Sweep expiring rows touched/sec,counter,SQLServer2017XTPGarbageCollection_Sweepexpiringrowstouched_over_sec
+SQL Server 2017 XTP Garbage Collection,Sweep rows touched/sec,counter,SQLServer2017XTPGarbageCollection_Sweeprowstouched_over_sec
+SQL Server 2017 XTP Garbage Collection,Sweep scans started/sec,counter,SQLServer2017XTPGarbageCollection_Sweepscansstarted_over_sec
+SQL Server 2017 XTP IO Governor,Insufficient Credits Waits/sec,counter,SQLServer2017XTPIOGovernor_InsufficientCreditsWaits_over_sec
+SQL Server 2017 XTP IO Governor,Io Issued/sec,counter,SQLServer2017XTPIOGovernor_IoIssued_over_sec
+SQL Server 2017 XTP IO Governor,Log Blocks/sec,counter,SQLServer2017XTPIOGovernor_LogBlocks_over_sec
+SQL Server 2017 XTP IO Governor,Missed Credit Slots,gauge,SQLServer2017XTPIOGovernor_MissedCreditSlots
+SQL Server 2017 XTP IO Governor,Stale Rate Object Waits/sec,counter,SQLServer2017XTPIOGovernor_StaleRateObjectWaits_over_sec
+SQL Server 2017 XTP IO Governor,Total Rate Objects Published,gauge,SQLServer2017XTPIOGovernor_TotalRateObjectsPublished
+SQL Server 2017 XTP Phantom Processor,Dusty corner scan retries/sec (Phantom-issued),counter,SQLServer2017XTPPhantomProcessor_Dustycornerscanretries_over_sec_Phantom_issued
+SQL Server 2017 XTP Phantom Processor,Phantom expired rows removed/sec,counter,SQLServer2017XTPPhantomProcessor_Phantomexpiredrowsremoved_over_sec
+SQL Server 2017 XTP Phantom Processor,Phantom expired rows touched/sec,counter,SQLServer2017XTPPhantomProcessor_Phantomexpiredrowstouched_over_sec
+SQL Server 2017 XTP Phantom Processor,Phantom expiring rows touched/sec,counter,SQLServer2017XTPPhantomProcessor_Phantomexpiringrowstouched_over_sec
+SQL Server 2017 XTP Phantom Processor,Phantom rows touched/sec,counter,SQLServer2017XTPPhantomProcessor_Phantomrowstouched_over_sec
+SQL Server 2017 XTP Phantom Processor,Phantom scans started/sec,counter,SQLServer2017XTPPhantomProcessor_Phantomscansstarted_over_sec
+SQL Server 2017 XTP Storage,Checkpoints Closed,gauge,SQLServer2017XTPStorage_CheckpointsClosed
+SQL Server 2017 XTP Storage,Checkpoints Completed,gauge,SQLServer2017XTPStorage_CheckpointsCompleted
+SQL Server 2017 XTP Storage,Core Merges Completed,gauge,SQLServer2017XTPStorage_CoreMergesCompleted
+SQL Server 2017 XTP Storage,Merge Policy Evaluations,gauge,SQLServer2017XTPStorage_MergePolicyEvaluations
+SQL Server 2017 XTP Storage,Merge Requests Outstanding,gauge,SQLServer2017XTPStorage_MergeRequestsOutstanding
+SQL Server 2017 XTP Storage,Merges Abandoned,gauge,SQLServer2017XTPStorage_MergesAbandoned
+SQL Server 2017 XTP Storage,Merges Installed,gauge,SQLServer2017XTPStorage_MergesInstalled
+SQL Server 2017 XTP Storage,Total Files Merged,gauge,SQLServer2017XTPStorage_TotalFilesMerged
+SQL Server 2017 XTP Transaction Log,Log bytes written/sec,counter,SQLServer2017XTPTransactionLog_Logbyteswritten_over_sec
+SQL Server 2017 XTP Transaction Log,Log records written/sec,counter,SQLServer2017XTPTransactionLog_Logrecordswritten_over_sec
+SQL Server 2017 XTP Transactions,Cascading aborts/sec,counter,SQLServer2017XTPTransactions_Cascadingaborts_over_sec
+SQL Server 2017 XTP Transactions,Commit dependencies taken/sec,counter,SQLServer2017XTPTransactions_Commitdependenciestaken_over_sec
+SQL Server 2017 XTP Transactions,Read-only transactions prepared/sec,counter,SQLServer2017XTPTransactions_Read_onlytransactionsprepared_over_sec
+SQL Server 2017 XTP Transactions,Save point refreshes/sec,counter,SQLServer2017XTPTransactions_Savepointrefreshes_over_sec
+SQL Server 2017 XTP Transactions,Save point rollbacks/sec,counter,SQLServer2017XTPTransactions_Savepointrollbacks_over_sec
+SQL Server 2017 XTP Transactions,Save points created/sec,counter,SQLServer2017XTPTransactions_Savepointscreated_over_sec
+SQL Server 2017 XTP Transactions,Transaction validation failures/sec,counter,SQLServer2017XTPTransactions_Transactionvalidationfailures_over_sec
+SQL Server 2017 XTP Transactions,Transactions aborted by user/sec,counter,SQLServer2017XTPTransactions_Transactionsabortedbyuser_over_sec
+SQL Server 2017 XTP Transactions,Transactions aborted/sec,counter,SQLServer2017XTPTransactions_Transactionsaborted_over_sec
+SQL Server 2017 XTP Transactions,Transactions created/sec,counter,SQLServer2017XTPTransactions_Transactionscreated_over_sec
+SQL Statistics,Auto-Param Attempts/sec,counter,SQLStatistics_Auto_ParamAttempts_over_sec
+SQL Statistics,Batch Requests/sec,counter,SQLStatistics_BatchRequests_over_sec
+SQL Statistics,Failed Auto-Params/sec,counter,SQLStatistics_FailedAuto_Params_over_sec
+SQL Statistics,Forced Parameterizations/sec,counter,SQLStatistics_ForcedParameterizations_over_sec
+SQL Statistics,Guided plan executions/sec,counter,SQLStatistics_Guidedplanexecutions_over_sec
+SQL Statistics,Misguided plan executions/sec,counter,SQLStatistics_Misguidedplanexecutions_over_sec
+SQL Statistics,Safe Auto-Params/sec,counter,SQLStatistics_SafeAuto_Params_over_sec
+SQL Statistics,SQL Attention rate,gauge,SQLStatistics_SQLAttentionrate
+SQL Statistics,SQL Compilations/sec,counter,SQLStatistics_SQLCompilations_over_sec
+SQL Statistics,SQL Re-Compilations/sec,counter,SQLStatistics_SQLRe_Compilations_over_sec
+SQL Statistics,Unsafe Auto-Params/sec,counter,SQLStatistics_UnsafeAuto_Params_over_sec
+Transactions,Free Space in tempdb (KB),gauge,Transactions_FreeSpaceintempdb_KB
+Transactions,Longest Transaction Running Time,gauge,Transactions_LongestTransactionRunningTime
+Transactions,NonSnapshot Version Transactions,gauge,Transactions_NonSnapshotVersionTransactions
+Transactions,Snapshot Transactions,gauge,Transactions_SnapshotTransactions
+Transactions,Transactions,gauge,Transactions_Transactions
+Transactions,Update conflict ratio,gauge,Transactions_Updateconflictratio
+Transactions,Update conflict ratio base,gauge,Transactions_Updateconflictratiobase
+Transactions,Update Snapshot Transactions,gauge,Transactions_UpdateSnapshotTransactions
+Transactions,Version Cleanup rate (KB/s),gauge,Transactions_VersionCleanuprate_KB_over_s
+Transactions,Version Generation rate (KB/s),gauge,Transactions_VersionGenerationrate_KB_over_s
+Transactions,Version Store Size (KB),gauge,Transactions_VersionStoreSize_KB
+Transactions,Version Store unit count,gauge,Transactions_VersionStoreunitcount
+Transactions,Version Store unit creation,gauge,Transactions_VersionStoreunitcreation
+Transactions,Version Store unit truncation,gauge,Transactions_VersionStoreunittruncation
+User Settable,Query,gauge,UserSettable_Query
+Wait Statistics,Lock waits,gauge,WaitStatistics_Lockwaits
+Wait Statistics,Log buffer waits,gauge,WaitStatistics_Logbufferwaits
+Wait Statistics,Log write waits,gauge,WaitStatistics_Logwritewaits
+Wait Statistics,Memory grant queue waits,gauge,WaitStatistics_Memorygrantqueuewaits
+Wait Statistics,Network IO waits,gauge,WaitStatistics_NetworkIOwaits
+Wait Statistics,Non-Page latch waits,gauge,WaitStatistics_Non_Pagelatchwaits
+Wait Statistics,Page IO latch waits,gauge,WaitStatistics_PageIOlatchwaits
+Wait Statistics,Page latch waits,gauge,WaitStatistics_Pagelatchwaits
+Wait Statistics,Thread-safe memory objects waits,gauge,WaitStatistics_Thread_safememoryobjectswaits
+Wait Statistics,Transaction ownership waits,gauge,WaitStatistics_Transactionownershipwaits
+Wait Statistics,Wait for the worker,gauge,WaitStatistics_Waitfortheworker
+Wait Statistics,Workspace synchronization waits,gauge,WaitStatistics_Workspacesynchronizationwaits
+Workload Group Stats,Active parallel threads,gauge,WorkloadGroupStats_Activeparallelthreads
+Workload Group Stats,Active requests,gauge,WorkloadGroupStats_Activerequests
+Workload Group Stats,Blocked tasks,gauge,WorkloadGroupStats_Blockedtasks
+Workload Group Stats,CPU delayed %,gauge,WorkloadGroupStats_CPUdelayed_perc
+Workload Group Stats,CPU delayed % base,gauge,WorkloadGroupStats_CPUdelayed_perc_base
+Workload Group Stats,CPU effective %,gauge,WorkloadGroupStats_CPUeffective_perc
+Workload Group Stats,CPU effective % base,gauge,WorkloadGroupStats_CPUeffective_perc_base
+Workload Group Stats,CPU usage %,gauge,WorkloadGroupStats_CPUusage_perc
+Workload Group Stats,CPU usage % base,gauge,WorkloadGroupStats_CPUusage_perc_base
+Workload Group Stats,CPU violated %,gauge,WorkloadGroupStats_CPUviolated_perc
+Workload Group Stats,Max request cpu time (ms),gauge,WorkloadGroupStats_Maxrequestcputime_ms
+Workload Group Stats,Max request memory grant (KB),gauge,WorkloadGroupStats_Maxrequestmemorygrant_KB
+Workload Group Stats,Query optimizations/sec,counter,WorkloadGroupStats_Queryoptimizations_over_sec
+Workload Group Stats,Queued requests,gauge,WorkloadGroupStats_Queuedrequests
+Workload Group Stats,Reduced memory grants/sec,counter,WorkloadGroupStats_Reducedmemorygrants_over_sec
+Workload Group Stats,Requests completed/sec,counter,WorkloadGroupStats_Requestscompleted_over_sec
+Workload Group Stats,Suboptimal plans/sec,counter,WorkloadGroupStats_Suboptimalplans_over_sec

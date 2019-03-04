@@ -1,0 +1,1 @@
+SELECT @@SERVERNAME, SERVERPROPERTY('ProductVersion');
