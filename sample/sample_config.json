@@ -5,8 +5,8 @@
      }],
      "waitStatsOptions": {
          "waitStatsFiles": [
-             "WaitStatsTemplates/CPU.txt",
-             "WaitStatsTemplates/Locks.txt"
+             "Templates/WaitStats/CPU.txt",
+             "Templates/WaitStats/Locks.txt"
          ]
      }
  }
