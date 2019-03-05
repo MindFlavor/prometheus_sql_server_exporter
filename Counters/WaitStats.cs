@@ -21,10 +21,58 @@ namespace MindFlavor.SQLServerExporter.Counters
         public SQLServerInfo SQLServerInfo;
         private ILogger<WaitStats> logger;
 
+        private static HashSet<string> Waits { get; set; }
+        private static string TSQLQuery { get; set; }
+
         public WaitStats(HttpContext context, SQLServerInfo sqlServerInfo)
         {
             this.SQLServerInfo = sqlServerInfo;
             logger = context.RequestServices.GetRequiredService<ILogger<WaitStats>>();
+
+            // in theory we should guard this code against concurrent access. It is possibile that
+            // two or more threads will work on the same HashSet concurrently because the all
+            // tested Waits == null to be true. In practice this will never happen as long as it's only
+            // one Prometheus calling our method. For now we will avoid the cost of a mutex, if bugs
+            // arise it will be included here.
+            if (Waits == null)
+            {
+                Waits = new HashSet<string>();
+
+                foreach (var file in Program.CommandLineOptions.WaitStatsOptions.WaitStatsFiles)
+                {
+                    System.IO.FileInfo fi = new System.IO.FileInfo(file);
+                    logger.LogInformation($"Loading wait stats to include from {fi.FullName}...");
+
+                    using (System.IO.StreamReader sr = new System.IO.StreamReader(new System.IO.FileStream(fi.FullName,
+                    System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.Read)))
+                    {
+                        string str;
+                        while ((str = sr.ReadLine()) != null)
+                        {
+                            if (str.StartsWith("#"))
+                                continue;
+
+                            Waits.Add(str);
+                        }
+                    }
+                }
+
+                string tsql = TSQLStore.ProbeTSQL("wait_stats", this.SQLServerInfo);
+                logger.LogDebug($"Probing wait statistics for {this.SQLServerInfo.Name}, version {this.SQLServerInfo.Version} returned {tsql}");
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                bool fFirst = true;
+                foreach (string str in Waits)
+                {
+                    if (!fFirst)
+                        sb.Append(",\n");
+                    else
+                        fFirst = false;
+                    sb.Append($"  N'{str}'");
+                }
+
+                TSQLQuery = tsql.Replace("%%WAITS%%", sb.ToString());
+            }
         }
 
         public async Task<string> QueryAndSerializeData()
@@ -37,11 +85,7 @@ namespace MindFlavor.SQLServerExporter.Counters
                 System.Text.StringBuilder sbTasksCount = new System.Text.StringBuilder();
                 System.Text.StringBuilder sbWaitTimeMS = new System.Text.StringBuilder();
 
-                string tsql = TSQLStore.ProbeTSQL("wait_stats", this.SQLServerInfo);
-
-                logger.LogDebug($"Probing wait statistics for {this.SQLServerInfo.Name}, version {this.SQLServerInfo.Version} returned {tsql}");
-
-                using (SqlCommand cmd = new SqlCommand(tsql, conn))
+                using (SqlCommand cmd = new SqlCommand(TSQLQuery, conn))
                 {
                     using (var reader = await cmd.ExecuteReaderAsync())
                     {

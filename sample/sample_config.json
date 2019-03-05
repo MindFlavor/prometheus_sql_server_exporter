@@ -2,5 +2,11 @@
      "port": 9966,
      "instances": [{
          "connectionString": "Server=.\\SQL17;Trusted_Connection=True;"
-     }]
+     }],
+     "waitStatsOptions": {
+         "waitStatsFiles": [
+             "WaitStatsTemplates/CPU.txt",
+             "WaitStatsTemplates/Locks.txt"
+         ]
+     }
  }
