@@ -38,10 +38,10 @@ namespace MindFlavor.SQLServerExporter.Counters
             {
                 Waits = new HashSet<string>();
 
-                foreach (var file in Program.CommandLineOptions.WaitStatsOptions.WaitStatsFiles)
+                foreach (var file in Program.CommandLineOptions.WaitStats.TemplateFiles)
                 {
                     System.IO.FileInfo fi = new System.IO.FileInfo(file);
-                    logger.LogInformation($"Loading wait stats to include from {fi.FullName}...");
+                    logger.LogInformation($"Loading wait stats template to include from {fi.FullName}...");
 
                     using (System.IO.StreamReader sr = new System.IO.StreamReader(new System.IO.FileStream(fi.FullName,
                     System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.Read)))

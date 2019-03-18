@@ -3,10 +3,16 @@
      "instances": [{
          "connectionString": "Server=.\\SQL17;Trusted_Connection=True;"
      }],
-     "waitStatsOptions": {
-         "waitStatsFiles": [
+     "waitStats": {
+         "templateFiles": [
              "Templates/WaitStats/CPU.txt",
              "Templates/WaitStats/Locks.txt"
          ]
+     },
+     "performanceCounters": {
+         "templateFiles": [
+             "Templates/PerformanceCounters/SQLStatistics.txt"
+         ]
      }
+
  }

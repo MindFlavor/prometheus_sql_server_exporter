@@ -4,24 +4,35 @@ using Newtonsoft.Json;
 public class CommandLineOptions
 {
     [JsonProperty(PropertyName = "instances")]
-    public List<SQLServerInstanceOptions> Instances { get; set; }
+    public List<SQLServerInstance> Instances { get; set; }
 
     [JsonProperty(PropertyName = "port")]
     public int Port { get; set; }
 
-    [JsonProperty(PropertyName = "waitStatsOptions")]
-    public WaitStatsOptions WaitStatsOptions { get; set; }
+    [JsonProperty(PropertyName = "waitStats")]
+    public WaitStats WaitStats { get; set; }
+
+    [JsonProperty(PropertyName = "performanceCounters")]
+    public PerformanceCounters PerformanceCounters { get; set; }
 }
 
-public class SQLServerInstanceOptions
+public class PerformanceCounters
+{
+    [JsonProperty(PropertyName = "templateFiles")]
+    public string[] TemplateFiles { get; set; }
+
+
+}
+
+public class SQLServerInstance
 {
     [JsonProperty(PropertyName = "connectionString")]
     public string ConnectionString { get; set; }
 }
 
-public class WaitStatsOptions
+public class WaitStats
 {
-    [JsonProperty(PropertyName = "waitStatsFiles")]
-    public string[] WaitStatsFiles { get; set; }
+    [JsonProperty(PropertyName = "templateFiles")]
+    public string[] TemplateFiles { get; set; }
 
 }
