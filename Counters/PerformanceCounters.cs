@@ -20,10 +20,16 @@ namespace MindFlavor.SQLServerExporter.Counters
     {
         public string type;
         public string name;
+
+        public override string ToString()
+        {
+            return $"{this.GetType().Name}[type == {type}, name == {name}]";
+        }
     }
 
     public class PerformanceCounters
     {
+        private static HashSet<string> EnabledCounters { get; set; }
         static Dictionary<string, GrafanaPerformanceCounter> _dGraf;
 
         public SQLServerInfo SQLServerInfo;
@@ -51,15 +57,44 @@ namespace MindFlavor.SQLServerExporter.Counters
             }
         }
 
-        private static string KeyFromObjectNameAndCounterName(string objectName, string counterName)
-        {
-            return objectName + "_" + counterName;
-        }
-
         public PerformanceCounters(HttpContext context, SQLServerInfo sqlServerInfo)
         {
             this.SQLServerInfo = sqlServerInfo;
             logger = context.RequestServices.GetRequiredService<ILogger<PerformanceCounters>>();
+
+            // in theory we should guard this code against concurrent access. It is possibile that
+            // two or more threads will work on the same HashSet concurrently because the all
+            // tested Waits == null to be true. In practice this will never happen as long as it's only
+            // one Prometheus calling our method. For now we will avoid the cost of a mutex, if bugs
+            // arise it will be included here.
+            if (EnabledCounters == null)
+            {
+                EnabledCounters = new HashSet<string>();
+
+                foreach (var file in Program.CommandLineOptions.PerformanceCounters.TemplateFiles)
+                {
+                    System.IO.FileInfo fi = new System.IO.FileInfo(file);
+                    logger.LogInformation($"Loading performance counter template to include from {fi.FullName}...");
+
+                    using (System.IO.StreamReader sr = new System.IO.StreamReader(new System.IO.FileStream(fi.FullName,
+                    System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.Read)))
+                    {
+                        string str;
+                        while ((str = sr.ReadLine()) != null)
+                        {
+                            if (str.StartsWith("#"))
+                                continue;
+
+                            EnabledCounters.Add(str);
+                        }
+                    }
+                }
+            }
+        }
+
+        private static string KeyFromObjectNameAndCounterName(string objectName, string counterName)
+        {
+            return objectName + "_" + counterName;
         }
 
         public async Task<string> QueryAndSerializeData()
@@ -98,6 +133,14 @@ namespace MindFlavor.SQLServerExporter.Counters
                             GrafanaPerformanceCounter gpc;
                             if (_dGraf.TryGetValue(key, out gpc))
                             {
+                                // skip this is it's not in the enabled performance counters
+                                // as specified by the template files configured.
+                                if (!EnabledCounters.Contains(gpc.name))
+                                {
+                                    logger.LogDebug($"PerformanceCounter {gpc} will be skipped because it's not in any configured template file");
+                                    continue;
+                                }
+
                                 string gpcName = $"sql_pc_{gpc.name}";
 
                                 sb.Append($"# TYPE {gpcName} {gpc.type}\n");

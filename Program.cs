@@ -17,6 +17,10 @@ namespace MindFlavor.SQLServerExporter
         public static CommandLineOptions CommandLineOptions { get; private set; }
         public static void Main(string[] args)
         {
+            var assemblyVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            System.Console.WriteLine($"Prometheus SQL Server Exporter v{assemblyVersion.ToString()}");
+            System.Console.WriteLine($"Licensed under Apache License 2.0\n");
+
             string configFile = null;
             for (int i = 0; (i < args.Length - 1 && configFile == null); i++)
                 if (args[i].ToLower() == "-c")
