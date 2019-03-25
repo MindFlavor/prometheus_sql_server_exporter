@@ -1,0 +1,25 @@
+{
+    "instances": [{
+          "connectionString": "Server=SQL16;Trusted_Connection=True;",
+          "instancename": "SQL16",
+          "port": 9091,
+          "waitStatsOptions": {
+              "waitStatsFiles": [
+                  "Templates/WaitStats/CPU.txt",
+                  "Templates/WaitStats/Locks.txt"
+                               ]
+                      }
+    },
+              
+              {
+                  "connectionString": "Server=.;Trusted_Connection=True;",
+                  "instancename": "SQL17",
+                  "port": 9092,
+                  "waitStatsOptions": {
+                      "waitStatsFiles": [
+                          "Templates/WaitStats/CPU.txt",
+                          "Templates/WaitStats/Locks.txt"
+                                       ]
+              }
+              }
+      ]}
