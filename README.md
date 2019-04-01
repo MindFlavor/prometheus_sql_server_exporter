@@ -78,6 +78,28 @@ sql_os_schedulers_active_workers_count{instance="FRCOGNOWIN10\SQL17", parent_nod
 
 This makes it possible to do interesting stuff in Grafana using Regexes (for example, you can plot the different worker threads per NUMA node).
 
+## Docker
+
+This is how you use it as container:
+
+```bash
+docker run -p 9966:9966 -v /home/mindflavor/:/config mindflavor:prometheus_sql_server_exporter
+```
+
+Where the mapped config folder contains the `config.json` file. 
+
+To create the container:
+
+```json
+docker build --tag=prometheus_sql_server_exporter .
+```
+
+In the project root folder. By default the container will use the `release` configuration for `dotnet publish`. If you want a container with the `debug` version of the code simply use:
+
+```bash
+docker build --target debug --tag=prometheus_sql_server_exporter .
+```
+
 ## Contributing
 
 The project needs help! Just fork/open an issue/whatever, no formality is required. Please note, however, that any code you submit as pull request must comply with this project LICENSE.
