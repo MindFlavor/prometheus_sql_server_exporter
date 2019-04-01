@@ -96,6 +96,20 @@ docker build --tag=prometheus_sql_server_exporter .
 
 In the project root folder.
 
+
+If you're using docker for Prometheus you can skip the port mapping, and place docker IP address in file prometheus.yml :
+
+```bash
+docker run -v /home/mindflavor/:/config mindflavor:prometheus_sql_server_exporter
+```
+
+To find your sqlexporter IP address on Docker interface use: 
+
+```bash
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' sqlexporterdocker_name
+```
+
+
 ## Contributing
 
 The project needs help! Just fork/open an issue/whatever, no formality is required. Please note, however, that any code you submit as pull request must comply with this project LICENSE.
