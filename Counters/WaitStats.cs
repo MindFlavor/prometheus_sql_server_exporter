@@ -21,8 +21,8 @@ namespace MindFlavor.SQLServerExporter.Counters
         public SQLServerInfo SQLServerInfo;
         private ILogger<WaitStats> logger;
 
-        private static HashSet<string> Waits { get; set; }
-        private static string TSQLQuery { get; set; }
+        private static HashSet<string>? Waits { get; set; }
+        private static string TSQLQuery { get; set; } = string.Empty;
 
         public WaitStats(HttpContext context, SQLServerInfo sqlServerInfo)
         {
@@ -38,7 +38,7 @@ namespace MindFlavor.SQLServerExporter.Counters
             {
                 Waits = new HashSet<string>();
 
-                foreach (var file in Program.CommandLineOptions.WaitStats.TemplateFiles)
+                foreach (var file in Program.CommandLineOptions!.WaitStats.TemplateFiles)
                 {
                     System.IO.FileInfo fi = new System.IO.FileInfo(file);
                     logger.LogInformation($"Loading wait stats template to include from {fi.FullName}...");
@@ -46,7 +46,7 @@ namespace MindFlavor.SQLServerExporter.Counters
                     using (System.IO.StreamReader sr = new System.IO.StreamReader(new System.IO.FileStream(fi.FullName,
                     System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.Read)))
                     {
-                        string str;
+                        string? str;
                         while ((str = sr.ReadLine()) != null)
                         {
                             if (str.StartsWith("#"))

@@ -14,14 +14,14 @@ namespace MindFlavor.SQLServerExporter
 {
     public class Program
     {
-        public static CommandLineOptions CommandLineOptions { get; private set; }
+        public static CommandLineOptions? CommandLineOptions { get; private set; }
         public static void Main(string[] args)
         {
             var assemblyVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            System.Console.WriteLine($"Prometheus SQL Server Exporter v{assemblyVersion.ToString()}");
+            System.Console.WriteLine($"Prometheus SQL Server Exporter v{assemblyVersion?.ToString() ?? "no version"}");
             System.Console.WriteLine($"Licensed under Apache License 2.0\n");
 
-            string configFile = null;
+            string? configFile = null;
             for (int i = 0; (i < args.Length - 1 && configFile == null); i++)
                 if (args[i].ToLower() == "-c")
                     configFile = args[i + 1];
@@ -32,7 +32,7 @@ namespace MindFlavor.SQLServerExporter
                 return;
             }
 
-            string jsonContents = null;
+            string? jsonContents = null;
             using (System.IO.StreamReader sr = new StreamReader(new System.IO.FileStream(configFile, FileMode.Open, FileAccess.Read, FileShare.Read)))
             {
                 jsonContents = sr.ReadToEnd();
@@ -47,7 +47,7 @@ namespace MindFlavor.SQLServerExporter
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseUrls($"http://*:{CommandLineOptions.Port}")
+                .UseUrls($"http://*:{CommandLineOptions!.Port}")
                 .UseStartup<Startup>();
     }
 }

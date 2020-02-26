@@ -31,7 +31,7 @@ namespace MindFlavor.SQLServerExporter
 
                 List<Task> lTasks = new List<Task>();
                 ConcurrentBag<string> bag = new ConcurrentBag<string>();
-                logger.LogDebug($"Before foreach(... {Program.CommandLineOptions.Instances.Count})");
+                logger.LogDebug($"Before foreach(... {Program.CommandLineOptions!.Instances.Count})");
                 try
                 {
                     foreach (var instance in Program.CommandLineOptions.Instances)
