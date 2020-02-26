@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <Version>0.2.0.0</Version>
+    <Version>0.3.0.0</Version>
     <Authors>Francesco Cogno</Authors>
     <Copyright>Apache License Version 2.0</Copyright>
     <PackageLicenseUrl>https://raw.githubusercontent.com/MindFlavor/prometheus_sql_server_exporter/master/LICENSE</PackageLicenseUrl>
@@ -11,10 +11,13 @@
     <RepositoryUrl>https://github.com/MindFlavor/prometheus_sql_server_exporter</RepositoryUrl>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Newtonsoft.JSON" Version="12.0.1" />
+    <PackageReference Include="Newtonsoft.JSON" Version="12.0.3" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
 
   <ItemGroup>
