@@ -17,7 +17,7 @@ namespace MindFlavor.SQLServerExporter
                     return;
                 }
 
-                string s = null;
+                string s;
                 using (FileStream fs = new FileInfo("C:\\tmp\\server-metrics-collectd_rev1.json").Open(FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
                     using (StreamReader sr = new StreamReader(fs))

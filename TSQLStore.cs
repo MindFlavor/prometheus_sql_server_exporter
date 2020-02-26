@@ -18,9 +18,15 @@ namespace MindFlavor.SQLServerExporter
                 .Select(i =>
                 {
                     // extract stream
-                    using (System.IO.StreamReader sr = new System.IO.StreamReader(System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(i)))
+                    System.IO.Stream? s = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(i);
+                    if (s == null)
+                        throw new Exception($"Resource stream not found ({i})");
+                    else
                     {
-                        return new Tuple<string, string>(i, sr.ReadToEnd());
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(s))
+                        {
+                            return new Tuple<string, string>(i, sr.ReadToEnd());
+                        }
                     }
                 })
                 .Select(tuple => new Tuple<string, string>(tuple.Item1.Substring(PREFIX.Length + 1), tuple.Item2));
