@@ -4,7 +4,7 @@
 ![](https://img.shields.io/github/release/mindflavor/prometheus_sql_server_exporter.svg)
 
 ![](https://travis-ci.org/MindFlavor/prometheus_sql_server_exporter.svg?branch=master)
-![](https://img.shields.io/github/commits-since/mindflavor/prometheus_sql_server_exporter/v0.2.0.svg)
+![](https://img.shields.io/github/commits-since/mindflavor/prometheus_sql_server_exporter/v0.3.0.svg)
 ![](https://img.shields.io/github/contributors/mindflavor/prometheus_sql_server_exporter.svg)
 
 > A prometheus exporter for the vital signs of Microsoft SQL Server instances
