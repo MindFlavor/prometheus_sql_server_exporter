@@ -8,7 +8,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace MindFlavor.SQLServerExporter
 {
@@ -38,7 +38,7 @@ namespace MindFlavor.SQLServerExporter
                 jsonContents = sr.ReadToEnd();
             }
 
-            CommandLineOptions = JsonConvert.DeserializeObject<CommandLineOptions>(jsonContents);
+            CommandLineOptions = JsonSerializer.Deserialize<CommandLineOptions>(jsonContents);
 
             var host = CreateWebHostBuilder(args).Build();
             var logger = host.Services.GetRequiredService<ILogger<Program>>();

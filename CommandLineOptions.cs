@@ -1,24 +1,24 @@
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 public class CommandLineOptions
 {
-    [JsonProperty(PropertyName = "instances")]
+    [JsonPropertyName("instances")]
     public List<SQLServerInstance> Instances { get; set; } = new List<SQLServerInstance>();
 
-    [JsonProperty(PropertyName = "port")]
+    [JsonPropertyName("port")]
     public int Port { get; set; }
 
-    [JsonProperty(PropertyName = "waitStats")]
+    [JsonPropertyName("waitStats")]
     public WaitStats WaitStats { get; set; } = new WaitStats();
 
-    [JsonProperty(PropertyName = "performanceCounters")]
+    [JsonPropertyName("performanceCounters")]
     public PerformanceCounters PerformanceCounters { get; set; } = new PerformanceCounters();
 }
 
 public class PerformanceCounters
 {
-    [JsonProperty(PropertyName = "templateFiles")]
+    [JsonPropertyName("templateFiles")]
     public string[] TemplateFiles { get; set; } = new string[0];
 
 
@@ -26,13 +26,13 @@ public class PerformanceCounters
 
 public class SQLServerInstance
 {
-    [JsonProperty(PropertyName = "connectionString")]
+    [JsonPropertyName("connectionString")]
     public string ConnectionString { get; set; } = string.Empty;
 }
 
 public class WaitStats
 {
-    [JsonProperty(PropertyName = "templateFiles")]
+    [JsonPropertyName("templateFiles")]
     public string[] TemplateFiles { get; set; } = new string[0];
 
 }
