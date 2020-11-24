@@ -78,6 +78,17 @@ namespace MindFlavor.SQLServerExporter
 
             var clerks = await new Counters.MemoryClerks(context, sqlServerInfo).QueryAndSerializeData();
             bag.Add(clerks);
+
+            if (Program.CommandLineOptions != null)
+            {
+                foreach (var customCounterConfiguration in Program.CommandLineOptions.CustomCounters)
+                {
+                    bag.Add(
+                        await new Counters.CustomCounter(context, sqlServerInfo, customCounterConfiguration.CustomCounter).QueryAndSerializeData()
+                    );
+                }
+            }
+
         }
     }
 }
