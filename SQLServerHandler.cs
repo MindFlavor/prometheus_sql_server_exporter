@@ -75,6 +75,9 @@ namespace MindFlavor.SQLServerExporter
 
             var waitStats = await new Counters.WaitStats(context, sqlServerInfo).QueryAndSerializeData();
             bag.Add(waitStats);
+
+            var clerks = await new Counters.MemoryClerks(context, sqlServerInfo).QueryAndSerializeData();
+            bag.Add(clerks);
         }
     }
 }
