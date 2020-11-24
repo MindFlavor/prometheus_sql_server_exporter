@@ -39,10 +39,34 @@ cp sample/sample_config.json ~/exporter_config.json
 vim ~/exporter_config # for info see below
 ```
 
+This is an example configuation file:
+
+```json
+{
+    "port": 9966,
+    "instances": [{
+        "connectionString": "Server=<your_instance>;Trusted_Connection=True;"
+    }],
+    "waitStats": {
+        "templateFiles": [
+            "Templates/WaitStats/Everything.txt",
+        ]
+    },
+    "performanceCounters": {
+        "templateFiles": [
+            "Templates/PerformanceCounters/Everything.txt"
+        ]
+    }
+}
+```
+
+The only mandatory field for you to configure is the connection string. You can add as many connection strings as you want to collect metrics from multiple instances at the same time.
+The other fields, `waitStats` and `performanceCounters` can accept different files if you want to collect *less* data. Leave as it is to collect everything.
+
 3. Start the exporter
 
 ```bash
-dotnet bin/Release/netcoreapp2.2/MindFlavor.SQLServerExporter.dll -c ~/exporter_config.json
+dotnet bin/Release/netcoreapp3.1/MindFlavor.SQLServerExporter.dll -c ~/exporter_config.json
 ```
 
 4. Add the exporter to Prometheus scraping process
@@ -73,6 +97,7 @@ The exporter right now exports:
 
 * [sys.dm_os_performance_counters](https://docs.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-views/sys-dm-os-performance-counters-transact-sql)
 * [sys.dm_os_schedulers](https://docs.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-views/sys-dm-os-schedulers-transact-sql)
+* Memory clerks aggregated sizes. See [https://docs.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-views/sys-dm-os-memory-clerks-transact-sql](https://docs.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-views/sys-dm-os-memory-clerks-transact-sql) for more info.
 
 The exports are somewhat changed from the bare table to make them more suitable for Prometheus. For example, the schedulers export the parent node, scheduler id and cpu id as parameters, like this:
 
@@ -87,10 +112,10 @@ This makes it possible to do interesting stuff in Grafana using Regexes (for exa
 This is how you use it as container:
 
 ```bash
-docker run -p 9966:9966 -v /home/mindflavor/:/config mindflavor:prometheus_sql_server_exporter
+docker run -p 9966:9966 -v /home/mindflavor/config.json:/config/config.json mindflavor:prometheus_sql_server_exporter
 ```
 
-Where the mapped config folder contains the `config.json` file. 
+Where the mapped config `config.json` file is the above mentioned configuration file.
 
 To create the container:
 
