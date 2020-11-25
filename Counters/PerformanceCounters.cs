@@ -142,7 +142,6 @@ namespace MindFlavor.SQLServerExporter.Counters
                                     // as specified by the template files configured.
                                     if (!EnabledCounters.Contains(gpc.name))
                                     {
-                                        logger.LogDebug($"PerformanceCounter {gpc} will be skipped because it's not in any configured template file");
                                         continue;
                                     }
 

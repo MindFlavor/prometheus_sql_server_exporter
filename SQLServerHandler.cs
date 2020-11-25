@@ -53,7 +53,8 @@ namespace MindFlavor.SQLServerExporter
                     DateTime dtStartTimeout = DateTime.Now;
                     while ((DateTime.Now - dtStartTimeout).TotalSeconds < Program.CommandLineOptions.InstanceTotalTimeout)
                     {
-                        lThreads.ForEach(t => t.Join(100));
+                        if (lThreads.All(t => t.Join(100)))
+                            break;
                     }
 
                     // if we arrive here and some threads are still

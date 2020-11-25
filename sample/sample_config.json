@@ -1,6 +1,6 @@
 {
     "port": 9966,
-    "instanceTotalTimeout": 15,
+    "instanceTotalTimeout": 10,
     "instances": [
         {
             "connectionString": "Server=10.100.5.1;User Id=other_admin;Password=Passw0rd;Connection timeout=5;"
