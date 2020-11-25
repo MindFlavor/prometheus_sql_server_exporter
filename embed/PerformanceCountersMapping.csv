@@ -586,3 +586,23 @@ Workload Group Stats,Queued requests,gauge,WorkloadGroupStats_Queuedrequests
 Workload Group Stats,Reduced memory grants/sec,counter,WorkloadGroupStats_Reducedmemorygrants_over_sec
 Workload Group Stats,Requests completed/sec,counter,WorkloadGroupStats_Requestscompleted_over_sec
 Workload Group Stats,Suboptimal plans/sec,counter,WorkloadGroupStats_Suboptimalplans_over_sec
+Availability Group,Active Hadr Threads,counter,AvailabilityGroup_Active_Hadr_Threads
+Databases,Active parallel redo threads,counter,Databases_Active_Parallel_Redo_Threads
+Databases,PVS off-row record generated/sec,counter,Databases_PVS_OffRow_Record_generated_over_sec
+Databases,PVS off-row record retrieved/sec,counter,Databases_PVS_OffRow_Record_retrieved_over_sec
+Databases,PVS off-row pages allocated/sec,counter,Databases_PVS_OffRow_Pages_allocated_over_sec
+Databases,PVS off-row pages deleted/sec,counter,Databases_PVS_OffRow_Pages_deleted_over_sec
+Databases,PVS in-row diff generated/sec,counter,Databases_PVS_InRow_Diff_generated_over_sec
+Databases,PVS in-row diff retrieved/sec,counter,Databases_PVS_InRow_Diff_retrieved_over_sec
+Databases,WPR add lsn bucket miss,counter,Databases_WPR_add_lsn_bucket_miss
+Databases,WPR stale check bucket miss,counter,Databases_WPR_stale_check_bucket_miss
+Databases,WPR bucket swaps,counter,Databases_WPR_bucket_swaps
+Databases,WPR add lsn bucket miss,counter,Databases_WPR_bucket_miss
+Databases,WPR stale check bucket miss,counter,Databases_WPR_stale_check_bucket_miss
+Databases,PVS off-row pages deleted/sec,counter,Databases_PVS_OffRow_Pages_deleted_over_sec
+Databases,PVS in-row diff generated/sec,counter,Databases_PVS_InRow_Diff_generated_over_sec
+Databases,PVS in-row diff retrieved/sec,counter,Databases_PVS_InRow_Diff_retrieved_over_sec
+Replication Agents,Running,counter,ReplicationAgents_Running
+Replication Snapshot,Snapshot:Delivered Cmds/sec,counter,ReplicationSnapshot_Snapshot_Delivered_Cmds_over_sec
+Replication Snapshot,Snapshot:Delivered Trans/sec,counter,ReplicationSnapshot_Snapshot_Delivered_Trans_over_sec
+External Scripts,Partition By Executions,counter,ExternalScripts_Partition_by_executions

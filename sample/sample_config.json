@@ -19,26 +19,24 @@
     "customCounters": [
         {
             "customCounter": {
-                "name": "sql_custom_dm_exec_requests00",
-                "tsql": "SELECT command, last_wait_type, COUNT(*) AS cnt FROM sys.dm_exec_requests GROUP BY command, last_wait_type;",
+                "name": "sql_user_sessions",
+                "tsql": "SELECT [status], COUNT(*) AS cnt FROM sys.dm_exec_requests WHERE session_id > 50 GROUP BY [status];",
                 "type": "gauge",
-                "help_text": "This is an example",
+                "help_text": "Current user sessions",
                 "attributes": [
-                    "command",
-                    "last_wait_type"
+                    "status"
                 ],
                 "value": "cnt"
             }
         },
         {
             "customCounter": {
-                "name": "sql_custom_dm_exec_requests01",
-                "tsql": "SELECT command, [status], COUNT(*) AS cnt FROM sys.dm_exec_requests GROUP BY command, [status];",
+                "name": "sql_suspended_sessions",
+                "tsql": "SELECT wait_type, COUNT(*) AS cnt FROM sys.dm_exec_requests WHERE session_id > 50 AND status = 'suspended' GROUP BY wait_type;",
                 "type": "gauge",
-                "help_text": "This is another example",
+                "help_text": "Current suspended user sessions",
                 "attributes": [
-                    "command",
-                    "status"
+                    "wait_type"
                 ],
                 "value": "cnt"
             }
