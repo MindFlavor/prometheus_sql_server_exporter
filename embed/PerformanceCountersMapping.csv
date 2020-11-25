@@ -597,11 +597,6 @@ Databases,PVS in-row diff retrieved/sec,counter,Databases_PVS_InRow_Diff_retriev
 Databases,WPR add lsn bucket miss,counter,Databases_WPR_add_lsn_bucket_miss
 Databases,WPR stale check bucket miss,counter,Databases_WPR_stale_check_bucket_miss
 Databases,WPR bucket swaps,counter,Databases_WPR_bucket_swaps
-Databases,WPR add lsn bucket miss,counter,Databases_WPR_bucket_miss
-Databases,WPR stale check bucket miss,counter,Databases_WPR_stale_check_bucket_miss
-Databases,PVS off-row pages deleted/sec,counter,Databases_PVS_OffRow_Pages_deleted_over_sec
-Databases,PVS in-row diff generated/sec,counter,Databases_PVS_InRow_Diff_generated_over_sec
-Databases,PVS in-row diff retrieved/sec,counter,Databases_PVS_InRow_Diff_retrieved_over_sec
 Replication Agents,Running,counter,ReplicationAgents_Running
 Replication Snapshot,Snapshot:Delivered Cmds/sec,counter,ReplicationSnapshot_Snapshot_Delivered_Cmds_over_sec
 Replication Snapshot,Snapshot:Delivered Trans/sec,counter,ReplicationSnapshot_Snapshot_Delivered_Trans_over_sec
