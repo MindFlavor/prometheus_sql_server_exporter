@@ -1,8 +1,12 @@
 {
     "port": 9966,
+    "instanceTotalTimeout": 5,
     "instances": [
         {
-            "connectionString": "Server=10.100.5.1;User Id=other_admin;Password=Passw0rd;"
+            "connectionString": "Server=10.100.5.1;User Id=other_admin;Password=Passw0rd;Connection timeout=5;"
+        },
+        {
+            "connectionString": "Server=v16sql16a.mindflavor.it;User Id=other_admin;Password=Passw0rd;Connection timeout=5;"
         }
     ],
     "waitStats": {

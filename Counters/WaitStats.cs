@@ -75,21 +75,21 @@ namespace MindFlavor.SQLServerExporter.Counters
             }
         }
 
-        public async Task<string> QueryAndSerializeData()
+        public string QueryAndSerializeData()
         {
             using (SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString))
             {
                 logger.LogDebug($"About to open connection to {this.SQLServerInfo.Name}");
-                await conn.OpenAsync();
+                conn.Open();
 
                 System.Text.StringBuilder sbTasksCount = new System.Text.StringBuilder();
                 System.Text.StringBuilder sbWaitTimeMS = new System.Text.StringBuilder();
 
                 using (SqlCommand cmd = new SqlCommand(TSQLQuery, conn))
                 {
-                    using (var reader = await cmd.ExecuteReaderAsync())
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        while (await reader.ReadAsync())
+                        while (reader.Read())
                         {
                             string waitType = reader.GetString(0);
                             long waitingTasksCount = reader.GetInt64(1);

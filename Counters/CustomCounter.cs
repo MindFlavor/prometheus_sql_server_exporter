@@ -21,20 +21,20 @@ namespace MindFlavor.SQLServerExporter.Counters
             this.Configuration = configuration;
         }
 
-        public async Task<string> QueryAndSerializeData()
+        public string QueryAndSerializeData()
         {
             using (SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString))
             {
                 logger.LogDebug($"About to open connection to {this.SQLServerInfo.Name}");
-                await conn.OpenAsync();
+                conn.Open();
 
                 System.Text.StringBuilder sbCustomCounter = new System.Text.StringBuilder();
 
                 using (SqlCommand cmd = new SqlCommand(this.Configuration.TSQL, conn))
                 {
-                    using (var reader = await cmd.ExecuteReaderAsync())
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        while (await reader.ReadAsync())
+                        while (reader.Read())
                         {
                             var attributes = new List<string>();
                             foreach (var header in Configuration.Attributes)
