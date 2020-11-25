@@ -474,6 +474,63 @@ Resource Pool Stats,Query exec memory target (KB),gauge,ResourcePoolStats_Querye
 Resource Pool Stats,Target memory (KB),gauge,ResourcePoolStats_Targetmemory_KB
 Resource Pool Stats,Used memory (KB),gauge,ResourcePoolStats_Usedmemory_KB
 SQL Errors,Errors/sec,counter,SQLErrors_Errors_over_sec
+SQL Server 2016 XTP Cursors,Cursor deletes/sec,counter,SQLServer2016XTPCursors_Cursordeletes_over_sec
+SQL Server 2016 XTP Cursors,Cursor inserts/sec,counter,SQLServer2016XTPCursors_Cursorinserts_over_sec
+SQL Server 2016 XTP Cursors,Cursor scans started/sec,counter,SQLServer2016XTPCursors_Cursorscansstarted_over_sec
+SQL Server 2016 XTP Cursors,Cursor unique violations/sec,counter,SQLServer2016XTPCursors_Cursoruniqueviolations_over_sec
+SQL Server 2016 XTP Cursors,Cursor updates/sec,counter,SQLServer2016XTPCursors_Cursorupdates_over_sec
+SQL Server 2016 XTP Cursors,Cursor write conflicts/sec,counter,SQLServer2016XTPCursors_Cursorwriteconflicts_over_sec
+SQL Server 2016 XTP Cursors,Dusty corner scan retries/sec (user-issued),counter,SQLServer2016XTPCursors_Dustycornerscanretries_over_sec_user_issued
+SQL Server 2016 XTP Cursors,Expired rows removed/sec,counter,SQLServer2016XTPCursors_Expiredrowsremoved_over_sec
+SQL Server 2016 XTP Cursors,Expired rows touched/sec,counter,SQLServer2016XTPCursors_Expiredrowstouched_over_sec
+SQL Server 2016 XTP Cursors,Rows returned/sec,counter,SQLServer2016XTPCursors_Rowsreturned_over_sec
+SQL Server 2016 XTP Cursors,Rows touched/sec,counter,SQLServer2016XTPCursors_Rowstouched_over_sec
+SQL Server 2016 XTP Cursors,Tentatively-deleted rows touched/sec,counter,SQLServer2016XTPCursors_Tentatively_deletedrowstouched_over_sec
+SQL Server 2016 XTP Garbage Collection,Dusty corner scan retries/sec (GC-issued),counter,SQLServer2016XTPGarbageCollection_Dustycornerscanretries_over_sec_GC_issued
+SQL Server 2016 XTP Garbage Collection,Main GC work items/sec,counter,SQLServer2016XTPGarbageCollection_MainGCworkitems_over_sec
+SQL Server 2016 XTP Garbage Collection,Parallel GC work item/sec,counter,SQLServer2016XTPGarbageCollection_ParallelGCworkitem_over_sec
+SQL Server 2016 XTP Garbage Collection,Rows processed/sec,counter,SQLServer2016XTPGarbageCollection_Rowsprocessed_over_sec
+SQL Server 2016 XTP Garbage Collection,Rows processed/sec (first in bucket and removed),counter,SQLServer2016XTPGarbageCollection_Rowsprocessed_over_sec_firstinbucketandremoved
+SQL Server 2016 XTP Garbage Collection,Rows processed/sec (first in bucket),counter,SQLServer2016XTPGarbageCollection_Rowsprocessed_over_sec_firstinbucket
+SQL Server 2016 XTP Garbage Collection,Rows processed/sec (marked for unlink),counter,SQLServer2016XTPGarbageCollection_Rowsprocessed_over_sec_markedforunlink
+SQL Server 2016 XTP Garbage Collection,Rows processed/sec (no sweep needed),counter,SQLServer2016XTPGarbageCollection_Rowsprocessed_over_sec_nosweepneeded
+SQL Server 2016 XTP Garbage Collection,Sweep expired rows removed/sec,counter,SQLServer2016XTPGarbageCollection_Sweepexpiredrowsremoved_over_sec
+SQL Server 2016 XTP Garbage Collection,Sweep expired rows touched/sec,counter,SQLServer2016XTPGarbageCollection_Sweepexpiredrowstouched_over_sec
+SQL Server 2016 XTP Garbage Collection,Sweep expiring rows touched/sec,counter,SQLServer2016XTPGarbageCollection_Sweepexpiringrowstouched_over_sec
+SQL Server 2016 XTP Garbage Collection,Sweep rows touched/sec,counter,SQLServer2016XTPGarbageCollection_Sweeprowstouched_over_sec
+SQL Server 2016 XTP Garbage Collection,Sweep scans started/sec,counter,SQLServer2016XTPGarbageCollection_Sweepscansstarted_over_sec
+SQL Server 2016 XTP IO Governor,Insufficient Credits Waits/sec,counter,SQLServer2016XTPIOGovernor_InsufficientCreditsWaits_over_sec
+SQL Server 2016 XTP IO Governor,Io Issued/sec,counter,SQLServer2016XTPIOGovernor_IoIssued_over_sec
+SQL Server 2016 XTP IO Governor,Log Blocks/sec,counter,SQLServer2016XTPIOGovernor_LogBlocks_over_sec
+SQL Server 2016 XTP IO Governor,Missed Credit Slots,gauge,SQLServer2016XTPIOGovernor_MissedCreditSlots
+SQL Server 2016 XTP IO Governor,Stale Rate Object Waits/sec,counter,SQLServer2016XTPIOGovernor_StaleRateObjectWaits_over_sec
+SQL Server 2016 XTP IO Governor,Total Rate Objects Published,gauge,SQLServer2016XTPIOGovernor_TotalRateObjectsPublished
+SQL Server 2016 XTP Phantom Processor,Dusty corner scan retries/sec (Phantom-issued),counter,SQLServer2016XTPPhantomProcessor_Dustycornerscanretries_over_sec_Phantom_issued
+SQL Server 2016 XTP Phantom Processor,Phantom expired rows removed/sec,counter,SQLServer2016XTPPhantomProcessor_Phantomexpiredrowsremoved_over_sec
+SQL Server 2016 XTP Phantom Processor,Phantom expired rows touched/sec,counter,SQLServer2016XTPPhantomProcessor_Phantomexpiredrowstouched_over_sec
+SQL Server 2016 XTP Phantom Processor,Phantom expiring rows touched/sec,counter,SQLServer2016XTPPhantomProcessor_Phantomexpiringrowstouched_over_sec
+SQL Server 2016 XTP Phantom Processor,Phantom rows touched/sec,counter,SQLServer2016XTPPhantomProcessor_Phantomrowstouched_over_sec
+SQL Server 2016 XTP Phantom Processor,Phantom scans started/sec,counter,SQLServer2016XTPPhantomProcessor_Phantomscansstarted_over_sec
+SQL Server 2016 XTP Storage,Checkpoints Closed,gauge,SQLServer2016XTPStorage_CheckpointsClosed
+SQL Server 2016 XTP Storage,Checkpoints Completed,gauge,SQLServer2016XTPStorage_CheckpointsCompleted
+SQL Server 2016 XTP Storage,Core Merges Completed,gauge,SQLServer2016XTPStorage_CoreMergesCompleted
+SQL Server 2016 XTP Storage,Merge Policy Evaluations,gauge,SQLServer2016XTPStorage_MergePolicyEvaluations
+SQL Server 2016 XTP Storage,Merge Requests Outstanding,gauge,SQLServer2016XTPStorage_MergeRequestsOutstanding
+SQL Server 2016 XTP Storage,Merges Abandoned,gauge,SQLServer2016XTPStorage_MergesAbandoned
+SQL Server 2016 XTP Storage,Merges Installed,gauge,SQLServer2016XTPStorage_MergesInstalled
+SQL Server 2016 XTP Storage,Total Files Merged,gauge,SQLServer2016XTPStorage_TotalFilesMerged
+SQL Server 2016 XTP Transaction Log,Log bytes written/sec,counter,SQLServer2016XTPTransactionLog_Logbyteswritten_over_sec
+SQL Server 2016 XTP Transaction Log,Log records written/sec,counter,SQLServer2016XTPTransactionLog_Logrecordswritten_over_sec
+SQL Server 2016 XTP Transactions,Cascading aborts/sec,counter,SQLServer2016XTPTransactions_Cascadingaborts_over_sec
+SQL Server 2016 XTP Transactions,Commit dependencies taken/sec,counter,SQLServer2016XTPTransactions_Commitdependenciestaken_over_sec
+SQL Server 2016 XTP Transactions,Read-only transactions prepared/sec,counter,SQLServer2016XTPTransactions_Read_onlytransactionsprepared_over_sec
+SQL Server 2016 XTP Transactions,Save point refreshes/sec,counter,SQLServer2016XTPTransactions_Savepointrefreshes_over_sec
+SQL Server 2016 XTP Transactions,Save point rollbacks/sec,counter,SQLServer2016XTPTransactions_Savepointrollbacks_over_sec
+SQL Server 2016 XTP Transactions,Save points created/sec,counter,SQLServer2016XTPTransactions_Savepointscreated_over_sec
+SQL Server 2016 XTP Transactions,Transaction validation failures/sec,counter,SQLServer2016XTPTransactions_Transactionvalidationfailures_over_sec
+SQL Server 2016 XTP Transactions,Transactions aborted by user/sec,counter,SQLServer2016XTPTransactions_Transactionsabortedbyuser_over_sec
+SQL Server 2016 XTP Transactions,Transactions aborted/sec,counter,SQLServer2016XTPTransactions_Transactionsaborted_over_sec
+SQL Server 2016 XTP Transactions,Transactions created/sec,counter,SQLServer2016XTPTransactions_Transactionscreated_over_sec
 SQL Server 2017 XTP Cursors,Cursor deletes/sec,counter,SQLServer2017XTPCursors_Cursordeletes_over_sec
 SQL Server 2017 XTP Cursors,Cursor inserts/sec,counter,SQLServer2017XTPCursors_Cursorinserts_over_sec
 SQL Server 2017 XTP Cursors,Cursor scans started/sec,counter,SQLServer2017XTPCursors_Cursorscansstarted_over_sec
