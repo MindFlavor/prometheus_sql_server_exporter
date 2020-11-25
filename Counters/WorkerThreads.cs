@@ -27,12 +27,12 @@ namespace MindFlavor.SQLServerExporter.Counters
             logger = context.RequestServices.GetRequiredService<ILogger<WorkerThread>>();
         }
 
-        public async Task<string> QueryAndSerializeData()
+        public string QueryAndSerializeData()
         {
             using (SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString))
             {
                 logger.LogDebug($"About to open connection to {this.SQLServerInfo.Name}");
-                await conn.OpenAsync();
+                conn.Open();
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
@@ -42,9 +42,9 @@ namespace MindFlavor.SQLServerExporter.Counters
 
                 using (SqlCommand cmd = new SqlCommand(tsql, conn))
                 {
-                    using (var reader = await cmd.ExecuteReaderAsync())
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        while (await reader.ReadAsync())
+                        while (reader.Read())
                         {
                             int parent_node_id = reader.GetInt32(0);
                             int scheduler_id = reader.GetInt32(1);

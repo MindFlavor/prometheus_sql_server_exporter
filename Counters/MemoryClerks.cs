@@ -23,12 +23,12 @@ namespace MindFlavor.SQLServerExporter.Counters
             TSQLQuery = TSQLStore.ProbeTSQL("memory_clerks", this.SQLServerInfo);
         }
 
-        public async Task<string> QueryAndSerializeData()
+        public string QueryAndSerializeData()
         {
             using (SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString))
             {
                 logger.LogDebug($"About to open connection to {this.SQLServerInfo.Name}");
-                await conn.OpenAsync();
+                conn.Open();
 
                 System.Text.StringBuilder sbSumPagesKB = new System.Text.StringBuilder();
                 System.Text.StringBuilder sbSumVirtualMemoryReservedKB = new System.Text.StringBuilder();
@@ -38,9 +38,9 @@ namespace MindFlavor.SQLServerExporter.Counters
 
                 using (SqlCommand cmd = new SqlCommand(TSQLQuery, conn))
                 {
-                    using (var reader = await cmd.ExecuteReaderAsync())
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        while (await reader.ReadAsync())
+                        while (reader.Read())
                         {
                             string clerk_name = reader.GetString(0);
                             long sum_pages_kb = reader.GetInt64(1);

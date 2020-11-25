@@ -98,7 +98,7 @@ namespace MindFlavor.SQLServerExporter.Counters
             return objectName + "_" + counterName;
         }
 
-        public async Task<string> QueryAndSerializeData()
+        public string QueryAndSerializeData()
         {
             if (EnabledCounters == null)
                 throw new Exception("EnabledCounters must not be null at this phase.");
@@ -107,7 +107,7 @@ namespace MindFlavor.SQLServerExporter.Counters
                 using (SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString))
                 {
                     logger.LogDebug($"About to open connection to {this.SQLServerInfo.Name}");
-                    await conn.OpenAsync();
+                    conn.Open();
 
                     System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
@@ -117,9 +117,9 @@ namespace MindFlavor.SQLServerExporter.Counters
 
                     using (SqlCommand cmd = new SqlCommand(tsql, conn))
                     {
-                        using (var reader = await cmd.ExecuteReaderAsync())
+                        using (var reader = cmd.ExecuteReader())
                         {
-                            while (await reader.ReadAsync())
+                            while (reader.Read())
                             {
                                 string objectName = reader.GetString(0).Trim();
                                 // this will strip the prefix because is dependent on the instance

@@ -26,21 +26,21 @@ namespace MindFlavor.SQLServerExporter
 
     public class SQLServerUtils
     {
-        public static async Task<SQLServerInfo> GetSQLServerInfo(HttpContext context, string connectionString)
+        public static SQLServerInfo GetSQLServerInfo(HttpContext context, string connectionString)
         {
             var logger = context.RequestServices.GetRequiredService<ILogger<SQLServerUtils>>();
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                logger.LogTrace($"Opening connection to {connectionString}");
-                await conn.OpenAsync();
+                logger.LogTrace($"Opening connection to {conn.ConnectionString}");
+                conn.Open();
 
                 using (SqlCommand cmd = new SqlCommand(TSQLStore.Entries["name_and_version"]["generic"], conn))
                 {
                     logger.LogDebug($"Performing {cmd.CommandText}");
-                    using (var reader = await cmd.ExecuteReaderAsync())
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        await reader.ReadAsync();
+                        reader.Read();
                         return new SQLServerInfo { ConnectionString = connectionString, Name = reader.GetString(0), Version = reader.GetString(1) };
                     }
                 }

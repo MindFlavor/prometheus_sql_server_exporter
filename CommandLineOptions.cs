@@ -3,11 +3,16 @@ using System.Text.Json.Serialization;
 
 public class CommandLineOptions
 {
+
+
     [JsonPropertyName("instances")]
     public List<SQLServerInstance> Instances { get; set; } = new List<SQLServerInstance>();
 
     [JsonPropertyName("port")]
     public int Port { get; set; }
+
+    [JsonPropertyName("instanceTotalTimeout")]
+    public int InstanceTotalTimeout { get; set; }
 
     [JsonPropertyName("waitStats")]
     public WaitStats WaitStats { get; set; } = new WaitStats();
