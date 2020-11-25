@@ -1,18 +1,45 @@
- {
-     "port": 9966,
-     "instances": [{
-         "connectionString": "Server=.\\SQL17;Trusted_Connection=True;"
-     }],
-     "waitStats": {
-         "templateFiles": [
-             "Templates/WaitStats/CPU.txt",
-             "Templates/WaitStats/Locks.txt"
-         ]
-     },
-     "performanceCounters": {
-         "templateFiles": [
-             "Templates/PerformanceCounters/SQLStatistics.txt"
-         ]
-     }
-
- }
+{
+    "port": 9966,
+    "instances": [
+        {
+            "connectionString": "Server=10.100.5.1;User Id=other_admin;Password=Passw0rd;"
+        }
+    ],
+    "waitStats": {
+        "templateFiles": [
+            "Templates/WaitStats/CPU.txt",
+            "Templates/WaitStats/Locks.txt"
+        ]
+    },
+    "performanceCounters": {
+        "templateFiles": [
+            "Templates/PerformanceCounters/SQLStatistics.txt"
+        ]
+    },
+    "customCounters": [
+        {
+            "customCounter": {
+                "name": "sql_user_sessions",
+                "tsql": "SELECT [status], COUNT(*) AS cnt FROM sys.dm_exec_requests WHERE session_id > 50 GROUP BY [status];",
+                "type": "gauge",
+                "help_text": "Current user sessions",
+                "attributes": [
+                    "status"
+                ],
+                "value": "cnt"
+            }
+        },
+        {
+            "customCounter": {
+                "name": "sql_suspended_sessions",
+                "tsql": "SELECT wait_type, COUNT(*) AS cnt FROM sys.dm_exec_requests WHERE session_id > 50 AND status = 'suspended' GROUP BY wait_type;",
+                "type": "gauge",
+                "help_text": "Current suspended user sessions",
+                "attributes": [
+                    "wait_type"
+                ],
+                "value": "cnt"
+            }
+        }
+    ]
+}

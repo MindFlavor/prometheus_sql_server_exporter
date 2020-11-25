@@ -14,6 +14,9 @@ public class CommandLineOptions
 
     [JsonPropertyName("performanceCounters")]
     public PerformanceCounters PerformanceCounters { get; set; } = new PerformanceCounters();
+
+    [JsonPropertyName("customCounters")]
+    public CustomCounters[] CustomCounters { get; set; } = new CustomCounters[0];
 }
 
 public class PerformanceCounters
@@ -35,4 +38,26 @@ public class WaitStats
     [JsonPropertyName("templateFiles")]
     public string[] TemplateFiles { get; set; } = new string[0];
 
+}
+
+public class CustomCounters
+{
+    [JsonPropertyName("customCounter")]
+    public CustomCounterConfiguration CustomCounter { get; set; } = new CustomCounterConfiguration();
+}
+
+public class CustomCounterConfiguration
+{
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = string.Empty;
+    [JsonPropertyName("tsql")]
+    public string TSQL { get; set; } = string.Empty;
+    [JsonPropertyName("attributes")]
+    public string[] Attributes { get; set; } = new string[0];
+    [JsonPropertyName("value")]
+    public string Value { get; set; } = string.Empty;
+    [JsonPropertyName("type")]
+    public string CounterType { get; set; } = string.Empty;
+    [JsonPropertyName("help_text")]
+    public string HelpText { get; set; } = string.Empty;
 }
