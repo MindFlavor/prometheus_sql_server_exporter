@@ -44,6 +44,7 @@ This is an example configuation file:
 ```json
 {
     "port": 9966,
+    "instanceTotalTimeout": 5,
     "instances": [{
         "connectionString": "Server=<your_instance>;Trusted_Connection=True;"
     }],

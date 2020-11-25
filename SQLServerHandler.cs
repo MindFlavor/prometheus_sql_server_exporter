@@ -31,19 +31,22 @@ namespace MindFlavor.SQLServerExporter
                 }
 
                 List<Thread> lThreads = new List<Thread>();
-                ConcurrentBag<string> bag = new ConcurrentBag<string>();
+                ConcurrentDictionary<string, ConcurrentBag<string>> dictBag = new ConcurrentDictionary<string, ConcurrentBag<string>>();
+
                 logger.LogDebug($"Before foreach(... {Program.CommandLineOptions!.Instances.Count})");
                 try
                 {
                     foreach (var instance in Program.CommandLineOptions.Instances)
                     {
-                        logger.LogDebug($"Adding ProcessInstance({context.ToString()}, {instance.ConnectionString}, {bag.ToString()}");
+                        logger.LogDebug($"Adding ProcessInstance({context.ToString()}, {instance.ConnectionString}, {dictBag.ToString()}");
 
                         var pts = new ParameterizedThreadStart(ProcessInstance);
                         Thread thread = new Thread(pts);
                         thread.Priority = ThreadPriority.BelowNormal;
                         thread.Name = instance.ConnectionString;
-                        thread.Start(new Tuple<HttpContext, string, ConcurrentBag<string>>(context, instance.ConnectionString, bag));
+                        thread.Start(new Tuple<HttpContext, string,
+                            System.Collections.Concurrent.ConcurrentDictionary<string, ConcurrentBag<string>>>
+                             (context, instance.ConnectionString, dictBag));
                         lThreads.Add(thread);
                     }
 
@@ -69,9 +72,12 @@ namespace MindFlavor.SQLServerExporter
                     context.Response.StatusCode = StatusCodes.Status200OK;
 
                     System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                    foreach (var s in bag)
+                    foreach (var bags in dictBag.Values)
                     {
-                        sb.Append(s);
+                        foreach (var s in bags)
+                        {
+                            sb.Append(s);
+                        }
                     }
 
                     await context.Response.WriteAsync(sb.ToString());
@@ -86,36 +92,36 @@ namespace MindFlavor.SQLServerExporter
 
         private static void ProcessInstance(object? o)
         {
-            Tuple<HttpContext, string, ConcurrentBag<string>> tuple = (Tuple<HttpContext, string, ConcurrentBag<string>>)o!;
+            Tuple<HttpContext, string, ConcurrentDictionary<string, ConcurrentBag<string>>> tuple = (Tuple<HttpContext, string, ConcurrentDictionary<string, ConcurrentBag<string>>>)o!;
             HttpContext context = tuple.Item1;
             string connectionString = tuple.Item2;
-            ConcurrentBag<string> bag = tuple.Item3;
+            ConcurrentDictionary<string, ConcurrentBag<string>> dictBags = tuple.Item3;
 
             var logger = context.RequestServices.GetRequiredService<ILogger<SQLServerHandler>>();
-            logger.LogTrace($"Called ProcessInstance(connectionString = {connectionString}, bag={bag.ToString()}");
+            logger.LogTrace($"Called ProcessInstance(connectionString = {connectionString}, dictBags={dictBags.ToString()}");
 
             try
             {
                 var sqlServerInfo = SQLServerUtils.GetSQLServerInfo(context, connectionString);
                 var retString = new Counters.WorkerThread(context, sqlServerInfo).QueryAndSerializeData();
-                bag.Add(retString);
+                dictBags.GetOrAdd("worker_thread", new ConcurrentBag<string>()).Add(retString);
 
                 var pc = new Counters.PerformanceCounters(context, sqlServerInfo).QueryAndSerializeData();
-                bag.Add(pc);
+                dictBags.GetOrAdd("performance_counters", new ConcurrentBag<string>()).Add(pc);
 
                 var waitStats = new Counters.WaitStats(context, sqlServerInfo).QueryAndSerializeData();
-                bag.Add(waitStats);
+                dictBags.GetOrAdd("wait_stats", new ConcurrentBag<string>()).Add(waitStats);
 
                 var clerks = new Counters.MemoryClerks(context, sqlServerInfo).QueryAndSerializeData();
-                bag.Add(clerks);
+                dictBags.GetOrAdd("memory_clerks", new ConcurrentBag<string>()).Add(clerks);
 
                 if (Program.CommandLineOptions != null)
                 {
                     foreach (var customCounterConfiguration in Program.CommandLineOptions.CustomCounters)
                     {
-                        bag.Add(
-                            new Counters.CustomCounter(context, sqlServerInfo, customCounterConfiguration.CustomCounter).QueryAndSerializeData()
-                        );
+                        var l =
+                            new Counters.CustomCounter(context, sqlServerInfo, customCounterConfiguration.CustomCounter).QueryAndSerializeData();
+                        dictBags.GetOrAdd(customCounterConfiguration.CustomCounter.Name, new ConcurrentBag<string>()).Add(l);
                     }
                 }
             }

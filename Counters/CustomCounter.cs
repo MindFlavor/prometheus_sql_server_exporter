@@ -21,6 +21,11 @@ namespace MindFlavor.SQLServerExporter.Counters
             this.Configuration = configuration;
         }
 
+        public string GenerateHeader()
+        {
+            return $"# TYPE {Configuration.Name} {Configuration.CounterType}\nHELP {Configuration.HelpText}\n";
+        }
+
         public string QueryAndSerializeData()
         {
             using (SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString))
@@ -55,8 +60,7 @@ namespace MindFlavor.SQLServerExporter.Counters
                 }
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append($"# TYPE {Configuration.Name} {Configuration.CounterType}\n");
-                sb.Append($"# HELP {Configuration.HelpText}\n");
+                //sb.Append(GenerateHeader());
                 sb.Append(sbCustomCounter);
 
                 return sb.ToString();
