@@ -148,7 +148,7 @@ namespace MindFlavor.SQLServerExporter.Counters
 
                                     string gpcName = $"sql_pc_{gpc.name}";
 
-                                    sb.Append($"# TYPE {gpcName} {gpc.type}\n");
+                                    //sb.Append($"# TYPE {gpcName} {gpc.type}\n");
 
                                     string completeName = $"{gpcName}{{instance=\"{this.SQLServerInfo.Name}\"";
 

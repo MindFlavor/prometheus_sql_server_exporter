@@ -60,19 +60,19 @@ namespace MindFlavor.SQLServerExporter.Counters
                 }
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append("# TYPE sql_memory_clerks_sum_pages_kb gauge\n");
+                //sb.Append("# TYPE sql_memory_clerks_sum_pages_kb gauge\n");
                 sb.Append(sbSumPagesKB);
 
-                sb.Append("# TYPE sql_memory_clerks_sum_virtual_memory_reserved_kb gauge\n");
+                //sb.Append("# TYPE sql_memory_clerks_sum_virtual_memory_reserved_kb gauge\n");
                 sb.Append(sbSumVirtualMemoryReservedKB);
 
-                sb.Append("# TYPE sql_memory_clerks_sum_virtual_memory_committed_kb gauge\n");
+                //sb.Append("# TYPE sql_memory_clerks_sum_virtual_memory_committed_kb gauge\n");
                 sb.Append(sbSumVirtualMemoryCommittedKB);
 
-                sb.Append("# TYPE sql_memory_clerks_sum_shared_memory_reserved_kb gauge\n");
+                //sb.Append("# TYPE sql_memory_clerks_sum_shared_memory_reserved_kb gauge\n");
                 sb.Append(sbSumSharedMemoryReservedKB);
 
-                sb.Append("# TYPE sql_memory_clerks_sum_shared_memory_committed_kb gauge\n");
+                //sb.Append("# TYPE sql_memory_clerks_sum_shared_memory_committed_kb gauge\n");
                 sb.Append(sbSumSharedMemoryCommittedKB);
 
                 return sb.ToString();
