@@ -43,7 +43,7 @@ namespace MindFlavor.SQLServerExporter
                         var pts = new ParameterizedThreadStart(ProcessInstance);
                         Thread thread = new Thread(pts);
                         thread.Priority = ThreadPriority.BelowNormal;
-                        thread.Name = instance.ConnectionString;
+                        thread.Name = new System.Data.SqlClient.SqlConnectionStringBuilder(instance.ConnectionString).DataSource;
                         thread.Start(new Tuple<HttpContext, string,
                             System.Collections.Concurrent.ConcurrentDictionary<string, ConcurrentBag<string>>>
                              (context, instance.ConnectionString, dictBag));
