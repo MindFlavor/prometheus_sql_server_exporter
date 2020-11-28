@@ -43,7 +43,7 @@ namespace MindFlavor.SQLServerExporter
                         var pts = new ParameterizedThreadStart(ProcessInstance);
                         Thread thread = new Thread(pts);
                         thread.Priority = ThreadPriority.BelowNormal;
-                        thread.Name = instance.ConnectionString;
+                        thread.Name = new System.Data.SqlClient.SqlConnectionStringBuilder(instance.ConnectionString).DataSource;
                         thread.Start(new Tuple<HttpContext, string,
                             System.Collections.Concurrent.ConcurrentDictionary<string, ConcurrentBag<string>>>
                              (context, instance.ConnectionString, dictBag));
@@ -69,6 +69,8 @@ namespace MindFlavor.SQLServerExporter
                             t.Interrupt();
                         }
                     });
+
+                    lThreads.ForEach(t => t.Join());
 
                     context.Response.StatusCode = StatusCodes.Status200OK;
 
@@ -128,7 +130,15 @@ namespace MindFlavor.SQLServerExporter
             }
             catch (Exception e)
             {
-                logger.LogWarning($"unhandled exception: {e.ToString()}");
+                try
+                {
+                    System.Data.SqlClient.SqlConnectionStringBuilder connBuilder = new System.Data.SqlClient.SqlConnectionStringBuilder(connectionString);
+                    logger.LogWarning($"unhandled exception processing \"{connBuilder.DataSource}\": {e.ToString()}");
+                }
+                catch (Exception einner)
+                {
+                    logger.LogWarning($"unhandled exception: {einner.ToString()}");
+                }
             }
         }
     }
