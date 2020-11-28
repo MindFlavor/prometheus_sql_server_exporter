@@ -70,6 +70,8 @@ namespace MindFlavor.SQLServerExporter
                         }
                     });
 
+                    lThreads.ForEach(t => t.Join());
+
                     context.Response.StatusCode = StatusCodes.Status200OK;
 
                     System.Text.StringBuilder sb = new System.Text.StringBuilder();
