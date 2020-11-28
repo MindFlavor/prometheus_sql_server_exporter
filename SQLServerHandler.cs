@@ -128,7 +128,15 @@ namespace MindFlavor.SQLServerExporter
             }
             catch (Exception e)
             {
-                logger.LogWarning($"unhandled exception: {e.ToString()}");
+                try
+                {
+                    System.Data.SqlClient.SqlConnectionStringBuilder connBuilder = new System.Data.SqlClient.SqlConnectionStringBuilder(connectionString);
+                    logger.LogWarning($"unhandled exception processing \"{connBuilder.DataSource}\": {e.ToString()}");
+                }
+                catch (Exception einner)
+                {
+                    logger.LogWarning($"unhandled exception: {einner.ToString()}");
+                }
             }
         }
     }
