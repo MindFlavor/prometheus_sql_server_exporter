@@ -63,7 +63,7 @@ namespace MindFlavor.SQLServerExporter.Counters
                 //sb.Append(GenerateHeader());
                 sb.Append(sbCustomCounter);
 
-                return sb.ToString();
+                return $"# HELP {Configuration.HelpText}\n# TYPE {Configuration.Name} {Configuration.CounterType}\n{sb.ToString()}";
             }
         }
     }
