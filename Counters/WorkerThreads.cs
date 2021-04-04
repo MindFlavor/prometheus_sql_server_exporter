@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Text;
 
 namespace MindFlavor.SQLServerExporter.Counters
 {
@@ -67,6 +68,55 @@ namespace MindFlavor.SQLServerExporter.Counters
                 return sb.ToString();
             }
         }
+
+        public PrometheusInstanceDictionary QueryAndSerializeData2()
+        {
+            PrometheusInstanceDictionary dic = new PrometheusInstanceDictionary();
+
+            using (SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString))
+            {
+                logger.LogDebug($"About to open connection to {this.SQLServerInfo.Name}");
+                conn.Open();
+
+                string tsql = TSQLStore.ProbeTSQL("worker_threads", this.SQLServerInfo);
+
+                logger.LogDebug($"Probing worker_threads for {this.SQLServerInfo.Name}, version {this.SQLServerInfo.Version} returned {tsql}");
+
+                using (SqlCommand cmd = new SqlCommand(tsql, conn))
+                {
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int parent_node_id = reader.GetInt32(0);
+                            int scheduler_id = reader.GetInt32(1);
+                            int cpu_id = reader.GetInt32(2);
+
+                            for (int i = 3; i < reader.FieldCount; i++)
+                            {
+                                var type = $"sql_os_schedulers_{reader.GetName(i)}";
+
+                                StringBuilder sb = new StringBuilder();
+
+                                sb.Append($"sql_os_schedulers_{reader.GetName(i)}{{instance=\"{this.SQLServerInfo.Name}\", parent_node_id=\"{parent_node_id}\", scheduler_id=\"{scheduler_id}\", cpu_id=\"{cpu_id}\"}} ");
+                                if (reader.GetFieldType(i) == typeof(bool))
+                                    sb.Append($"{(reader.GetBoolean(i) == true ? "1" : "0")}\n");
+                                else if (reader.GetFieldType(i) == typeof(Int32))
+                                    sb.Append($"{reader.GetInt32(i)}\n");
+                                else
+                                    sb.Append($"{reader.GetInt64(i)}\n");
+
+                                dic.Add(type, $"{type} counter", sb.ToString());
+                            }
+                        }
+                    }
+                }
+
+                return dic;
+            }
+        }
+
+
 
     }
 }
