@@ -98,7 +98,7 @@ namespace MindFlavor.SQLServerExporter.Counters
             return objectName + "_" + counterName;
         }
 
-        public string QueryAndSerializeData()
+        public PrometheusInstanceDictionary QueryAndSerializeData()
         {
             if (EnabledCounters == null)
                 throw new Exception("EnabledCounters must not be null at this phase.");
@@ -109,7 +109,7 @@ namespace MindFlavor.SQLServerExporter.Counters
                     logger.LogDebug($"About to open connection to {this.SQLServerInfo.Name}");
                     conn.Open();
 
-                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    PrometheusInstanceDictionary dict = new PrometheusInstanceDictionary();
 
                     string tsql = TSQLStore.ProbeTSQL("performance_counters", this.SQLServerInfo);
 
@@ -147,8 +147,6 @@ namespace MindFlavor.SQLServerExporter.Counters
 
                                     string gpcName = $"sql_pc_{gpc.name}";
 
-                                    //sb.Append($"# TYPE {gpcName} {gpc.type}\n");
-
                                     string completeName = $"{gpcName}{{instance=\"{this.SQLServerInfo.Name}\"";
 
                                     if (!string.IsNullOrEmpty(instanceName))
@@ -157,7 +155,7 @@ namespace MindFlavor.SQLServerExporter.Counters
                                     }
                                     completeName += "}";
 
-                                    sb.Append($"{completeName} {cntr_value.ToString()}\n");
+                                    dict.Add(gpcName, "counter", gpcName, $"{completeName} {cntr_value.ToString()}");
                                 }
                                 else
                                 {
@@ -167,7 +165,7 @@ namespace MindFlavor.SQLServerExporter.Counters
                         }
                     }
 
-                    return sb.ToString();
+                    return dict;
                 }
             }
         }
