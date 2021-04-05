@@ -115,8 +115,5 @@ namespace MindFlavor.SQLServerExporter.Counters
                 return dic;
             }
         }
-
-
-
     }
 }

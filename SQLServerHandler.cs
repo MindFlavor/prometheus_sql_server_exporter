@@ -109,24 +109,24 @@ namespace MindFlavor.SQLServerExporter
                 var retString = new Counters.WorkerThread(context, sqlServerInfo).QueryAndSerializeData();
                 dictBags.GetOrAdd("worker_thread", new ConcurrentBag<string>()).Add(retString);
 
-                var pc = new Counters.PerformanceCounters(context, sqlServerInfo).QueryAndSerializeData();
-                dictBags.GetOrAdd("performance_counters", new ConcurrentBag<string>()).Add(pc);
+                //var pc = new Counters.PerformanceCounters(context, sqlServerInfo).QueryAndSerializeData();
+                //dictBags.GetOrAdd("performance_counters", new ConcurrentBag<string>()).Add(pc);
 
-                var waitStats = new Counters.WaitStats(context, sqlServerInfo).QueryAndSerializeData();
-                dictBags.GetOrAdd("wait_stats", new ConcurrentBag<string>()).Add(waitStats);
+                //var waitStats = new Counters.WaitStats(context, sqlServerInfo).QueryAndSerializeData();
+                //dictBags.GetOrAdd("wait_stats", new ConcurrentBag<string>()).Add(waitStats);
 
-                var clerks = new Counters.MemoryClerks(context, sqlServerInfo).QueryAndSerializeData();
-                dictBags.GetOrAdd("memory_clerks", new ConcurrentBag<string>()).Add(clerks);
+                //var clerks = new Counters.MemoryClerks(context, sqlServerInfo).QueryAndSerializeData();
+                //dictBags.GetOrAdd("memory_clerks", new ConcurrentBag<string>()).Add(clerks);
 
-                if (Program.CommandLineOptions != null)
-                {
-                    foreach (var customCounterConfiguration in Program.CommandLineOptions.CustomCounters)
-                    {
-                        var l =
-                            new Counters.CustomCounter(context, sqlServerInfo, customCounterConfiguration.CustomCounter).QueryAndSerializeData();
-                        dictBags.GetOrAdd(customCounterConfiguration.CustomCounter.Name, new ConcurrentBag<string>()).Add(l);
-                    }
-                }
+                //if (Program.CommandLineOptions != null)
+                //{
+                //    foreach (var customCounterConfiguration in Program.CommandLineOptions.CustomCounters)
+                //    {
+                //        var l =
+                //            new Counters.CustomCounter(context, sqlServerInfo, customCounterConfiguration.CustomCounter).QueryAndSerializeData();
+                //        dictBags.GetOrAdd(customCounterConfiguration.CustomCounter.Name, new ConcurrentBag<string>()).Add(l);
+                //    }
+                //}
             }
             catch (Exception e)
             {

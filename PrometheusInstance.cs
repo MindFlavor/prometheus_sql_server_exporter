@@ -19,6 +19,11 @@ namespace MindFlavor.SQLServerExporter
 
         public void Add(string value) { this.values.Add(value); }
 
+        public string SerializeHeader()
+        {
+            return $"TYPE {Type}\nHELP {Help}\n";
+        }
+
         public string SerializeValues()
         {
             StringBuilder sb = new StringBuilder();
