@@ -110,8 +110,8 @@ namespace MindFlavor.SQLServerExporter
                 var pc = new Counters.PerformanceCounters(context, sqlServerInfo).QueryAndSerializeData();
                 dict.Merge(pc);
 
-                //var waitStats = new Counters.WaitStats(context, sqlServerInfo).QueryAndSerializeData();
-                //dictBags.GetOrAdd("wait_stats", new ConcurrentBag<string>()).Add(waitStats);
+                var waitStats = new Counters.WaitStats(context, sqlServerInfo).QueryAndSerializeData();
+                dict.Merge(waitStats);
 
                 //var clerks = new Counters.MemoryClerks(context, sqlServerInfo).QueryAndSerializeData();
                 //dictBags.GetOrAdd("memory_clerks", new ConcurrentBag<string>()).Add(clerks);

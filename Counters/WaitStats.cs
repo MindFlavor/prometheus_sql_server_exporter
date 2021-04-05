@@ -75,15 +75,14 @@ namespace MindFlavor.SQLServerExporter.Counters
             }
         }
 
-        public string QueryAndSerializeData()
+        public PrometheusInstanceDictionary QueryAndSerializeData()
         {
             using (SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString))
             {
                 logger.LogDebug($"About to open connection to {this.SQLServerInfo.Name}");
                 conn.Open();
 
-                System.Text.StringBuilder sbTasksCount = new System.Text.StringBuilder();
-                System.Text.StringBuilder sbWaitTimeMS = new System.Text.StringBuilder();
+                PrometheusInstanceDictionary dict = new PrometheusInstanceDictionary();
 
                 using (SqlCommand cmd = new SqlCommand(TSQLQuery, conn))
                 {
@@ -95,20 +94,13 @@ namespace MindFlavor.SQLServerExporter.Counters
                             long waitingTasksCount = reader.GetInt64(1);
                             long waitTimeMS = reader.GetInt64(2);
 
-                            sbTasksCount.Append($"sql_waiting_tasks_count{{instance=\"{this.SQLServerInfo.Name}\", wait=\"{waitType}\"}} {waitingTasksCount}\n");
-                            sbWaitTimeMS.Append($"sql_wait_time_ms{{instance=\"{this.SQLServerInfo.Name}\", wait=\"{waitType}\"}} {waitTimeMS}\n");
+                            dict.Add("sql_waiting_tasks_count", "gauge", "sql_waiting_tasks_count", $"sql_waiting_tasks_count{{instance=\"{this.SQLServerInfo.Name}\", wait=\"{waitType}\"}} {waitingTasksCount}");
+                            dict.Add("sql_wait_time_ms", "counter", "sql_wait_time_ms", $"sql_wait_time_ms{{instance=\"{this.SQLServerInfo.Name}\", wait=\"{waitType}\"}} {waitTimeMS}");
                         }
                     }
                 }
 
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append("# TYPE sql_waiting_tasks_count gauge\n");
-                sb.Append(sbTasksCount);
-
-                sb.Append("# TYPE sql_wait_time_ms counter\n");
-                sb.Append(sbWaitTimeMS);
-
-                return sb.ToString();
+                return dict;
             }
         }
     }
