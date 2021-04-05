@@ -113,8 +113,8 @@ namespace MindFlavor.SQLServerExporter
                 var waitStats = new Counters.WaitStats(context, sqlServerInfo).QueryAndSerializeData();
                 dict.Merge(waitStats);
 
-                //var clerks = new Counters.MemoryClerks(context, sqlServerInfo).QueryAndSerializeData();
-                //dictBags.GetOrAdd("memory_clerks", new ConcurrentBag<string>()).Add(clerks);
+                var clerks = new Counters.MemoryClerks(context, sqlServerInfo).QueryAndSerializeData();
+                dict.Merge(clerks);
 
                 //if (Program.CommandLineOptions != null)
                 //{

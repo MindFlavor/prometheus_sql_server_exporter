@@ -23,18 +23,14 @@ namespace MindFlavor.SQLServerExporter.Counters
             TSQLQuery = TSQLStore.ProbeTSQL("memory_clerks", this.SQLServerInfo);
         }
 
-        public string QueryAndSerializeData()
+        public PrometheusInstanceDictionary QueryAndSerializeData()
         {
             using (SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString))
             {
                 logger.LogDebug($"About to open connection to {this.SQLServerInfo.Name}");
                 conn.Open();
 
-                System.Text.StringBuilder sbSumPagesKB = new System.Text.StringBuilder();
-                System.Text.StringBuilder sbSumVirtualMemoryReservedKB = new System.Text.StringBuilder();
-                System.Text.StringBuilder sbSumVirtualMemoryCommittedKB = new System.Text.StringBuilder();
-                System.Text.StringBuilder sbSumSharedMemoryReservedKB = new System.Text.StringBuilder();
-                System.Text.StringBuilder sbSumSharedMemoryCommittedKB = new System.Text.StringBuilder();
+                PrometheusInstanceDictionary dict = new PrometheusInstanceDictionary();
 
                 using (SqlCommand cmd = new SqlCommand(TSQLQuery, conn))
                 {
@@ -49,33 +45,16 @@ namespace MindFlavor.SQLServerExporter.Counters
                             long sum_shared_memory_reserved_kb = reader.GetInt64(4);
                             long sum_shared_memory_committed_kb = reader.GetInt64(5);
 
-
-                            sbSumPagesKB.Append($"sql_memory_clerks_sum_pages_kb{{instance=\"{this.SQLServerInfo.Name}\", clerk=\"{clerk_name}\"}} {sum_pages_kb}\n");
-                            sbSumVirtualMemoryReservedKB.Append($"sql_memory_clerks_sum_virtual_memory_reserved_kb{{instance=\"{this.SQLServerInfo.Name}\", clerk=\"{clerk_name}\"}} {sum_virtual_memory_reserved_kb}\n");
-                            sbSumVirtualMemoryCommittedKB.Append($"sql_memory_clerks_sum_virtual_memory_committed_kb{{instance=\"{this.SQLServerInfo.Name}\", clerk=\"{clerk_name}\"}} {sum_virtual_memory_committed_kb}\n");
-                            sbSumSharedMemoryReservedKB.Append($"sql_memory_clerks_sum_shared_memory_reserved_kb{{instance=\"{this.SQLServerInfo.Name}\", clerk=\"{clerk_name}\"}} {sum_shared_memory_reserved_kb}\n");
-                            sbSumSharedMemoryCommittedKB.Append($"sql_memory_clerks_sum_shared_memory_committed_kb{{instance=\"{this.SQLServerInfo.Name}\", clerk=\"{clerk_name}\"}} {sum_shared_memory_committed_kb}\n");
+                            dict.Add("sql_memory_clerks_sum_pages_kb", "gauge", "sql_memory_clerks_sum_pages_kb", $"sql_memory_clerks_sum_pages_kb{{instance=\"{this.SQLServerInfo.Name}\", clerk=\"{clerk_name}\"}} {sum_pages_kb}");
+                            dict.Add("sql_memory_clerks_sum_virtual_memory_reserved_kb", "gauge", "sql_memory_clerks_sum_virtual_memory_reserved_kb", $"sql_memory_clerks_sum_virtual_memory_reserved_kb{{instance=\"{this.SQLServerInfo.Name}\", clerk=\"{clerk_name}\"}} {sum_virtual_memory_reserved_kb}");
+                            dict.Add("sql_memory_clerks_sum_virtual_memory_committed_kb", "gauge", "sql_memory_clerks_sum_virtual_memory_committed_kb", $"sql_memory_clerks_sum_virtual_memory_committed_kb{{instance=\"{this.SQLServerInfo.Name}\", clerk=\"{clerk_name}\"}} {sum_virtual_memory_committed_kb}");
+                            dict.Add("sql_memory_clerks_sum_shared_memory_reserved_kb", "gauge", "sql_memory_clerks_sum_shared_memory_reserved_kb", $"sql_memory_clerks_sum_shared_memory_reserved_kb{{instance=\"{this.SQLServerInfo.Name}\", clerk=\"{clerk_name}\"}} {sum_shared_memory_reserved_kb}");
+                            dict.Add("sql_memory_clerks_sum_shared_memory_committed_kb", "gauge", "sql_memory_clerks_sum_shared_memory_committed_kb", $"sql_memory_clerks_sum_shared_memory_committed_kb{{instance=\"{this.SQLServerInfo.Name}\", clerk=\"{clerk_name}\"}} {sum_shared_memory_committed_kb}");
                         }
                     }
                 }
 
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                //sb.Append("# TYPE sql_memory_clerks_sum_pages_kb gauge\n");
-                sb.Append(sbSumPagesKB);
-
-                //sb.Append("# TYPE sql_memory_clerks_sum_virtual_memory_reserved_kb gauge\n");
-                sb.Append(sbSumVirtualMemoryReservedKB);
-
-                //sb.Append("# TYPE sql_memory_clerks_sum_virtual_memory_committed_kb gauge\n");
-                sb.Append(sbSumVirtualMemoryCommittedKB);
-
-                //sb.Append("# TYPE sql_memory_clerks_sum_shared_memory_reserved_kb gauge\n");
-                sb.Append(sbSumSharedMemoryReservedKB);
-
-                //sb.Append("# TYPE sql_memory_clerks_sum_shared_memory_committed_kb gauge\n");
-                sb.Append(sbSumSharedMemoryCommittedKB);
-
-                return sb.ToString();
+                return dict;
             }
         }
     }
