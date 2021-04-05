@@ -5,13 +5,15 @@ namespace MindFlavor.SQLServerExporter
 {
     public class PrometheusInstance
     {
+        public string Name { get; }
         public string Type { get; }
         public string Help { get; }
 
         private List<string> values;
 
-        public PrometheusInstance(string type, string help)
+        public PrometheusInstance(string name, string type, string help)
         {
+            this.Name = name;
             this.Type = type;
             this.Help = help;
             this.values = new List<string>();
@@ -21,7 +23,7 @@ namespace MindFlavor.SQLServerExporter
 
         public void Merge(PrometheusInstance pi)
         {
-            if (this.Type != pi.Type)
+            if (this.Name != pi.Name)
                 throw new System.ArgumentException("incompatible PrometheusInstances");
 
             this.values.AddRange(pi.values);
@@ -29,7 +31,7 @@ namespace MindFlavor.SQLServerExporter
 
         public string SerializeHeader()
         {
-            return $"TYPE {Type}\nHELP {Help}\n";
+            return $"HELP {Help}\nTYPE {Name} {Type}\n";
         }
 
         public string SerializeValues()

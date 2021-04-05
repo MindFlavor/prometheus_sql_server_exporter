@@ -53,7 +53,7 @@ namespace MindFlavor.SQLServerExporter.Counters
 
                             for (int i = 3; i < reader.FieldCount; i++)
                             {
-                                var type = $"sql_os_schedulers_{reader.GetName(i)}";
+                                var name = $"sql_os_schedulers_{reader.GetName(i)}";
 
                                 StringBuilder sb = new StringBuilder();
 
@@ -65,7 +65,7 @@ namespace MindFlavor.SQLServerExporter.Counters
                                 else
                                     sb.Append($"{reader.GetInt64(i)}");
 
-                                dic.Add(type, $"{type}", sb.ToString());
+                                dic.Add(name, "counter", $"{name}", sb.ToString());
                             }
                         }
                     }
