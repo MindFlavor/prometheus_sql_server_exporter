@@ -31,22 +31,24 @@ namespace MindFlavor.SQLServerExporter
                 }
 
                 List<Thread> lThreads = new List<Thread>();
-                ConcurrentDictionary<string, ConcurrentBag<string>> dictBag = new ConcurrentDictionary<string, ConcurrentBag<string>>();
+                List<PrometheusInstanceDictionary> dictionaries = new List<PrometheusInstanceDictionary>();
 
                 logger.LogDebug($"Before foreach(... {Program.CommandLineOptions!.Instances.Count})");
                 try
                 {
                     foreach (var instance in Program.CommandLineOptions.Instances)
                     {
-                        logger.LogDebug($"Adding ProcessInstance({context.ToString()}, {instance.ConnectionString}, {dictBag.ToString()}");
+                        PrometheusInstanceDictionary pidInstance = new PrometheusInstanceDictionary();
+                        dictionaries.Add(pidInstance);
+
+                        logger.LogDebug($"Adding ProcessInstance({context.ToString()}, {instance.ConnectionString}, {pidInstance.ToString()}");
 
                         var pts = new ParameterizedThreadStart(ProcessInstance);
                         Thread thread = new Thread(pts);
                         thread.Priority = ThreadPriority.BelowNormal;
                         thread.Name = new System.Data.SqlClient.SqlConnectionStringBuilder(instance.ConnectionString).DataSource;
-                        thread.Start(new Tuple<HttpContext, string,
-                            System.Collections.Concurrent.ConcurrentDictionary<string, ConcurrentBag<string>>>
-                             (context, instance.ConnectionString, dictBag));
+                        thread.Start(new Tuple<HttpContext, string, PrometheusInstanceDictionary>
+                             (context, instance.ConnectionString, pidInstance));
                         lThreads.Add(thread);
                     }
 
@@ -74,16 +76,12 @@ namespace MindFlavor.SQLServerExporter
 
                     context.Response.StatusCode = StatusCodes.Status200OK;
 
-                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                    foreach (var bags in dictBag.Values)
-                    {
-                        foreach (var s in bags)
-                        {
-                            sb.Append(s);
-                        }
-                    }
+                    // now merge all the dictionaries into the first one.
+                    PrometheusInstanceDictionary pidFinal = dictionaries[0];
+                    for (int i = 1; i < dictionaries.Count; i++)
+                        pidFinal.Merge(dictionaries[i]);
 
-                    await context.Response.WriteAsync(sb.ToString());
+                    await context.Response.WriteAsync(pidFinal.SerializeAll());
                 }
                 catch (Exception exce)
                 {
@@ -95,19 +93,19 @@ namespace MindFlavor.SQLServerExporter
 
         private static void ProcessInstance(object? o)
         {
-            Tuple<HttpContext, string, ConcurrentDictionary<string, ConcurrentBag<string>>> tuple = (Tuple<HttpContext, string, ConcurrentDictionary<string, ConcurrentBag<string>>>)o!;
+            var tuple = (Tuple<HttpContext, string, PrometheusInstanceDictionary>)o!;
             HttpContext context = tuple.Item1;
             string connectionString = tuple.Item2;
-            ConcurrentDictionary<string, ConcurrentBag<string>> dictBags = tuple.Item3;
+            PrometheusInstanceDictionary dict = tuple.Item3;
 
             var logger = context.RequestServices.GetRequiredService<ILogger<SQLServerHandler>>();
-            logger.LogTrace($"Called ProcessInstance(connectionString = {connectionString}, dictBags={dictBags.ToString()}");
+            logger.LogTrace($"Called ProcessInstance(connectionString = {connectionString}, dict={dict.ToString()}");
 
             try
             {
                 var sqlServerInfo = SQLServerUtils.GetSQLServerInfo(context, connectionString);
-                var retString = new Counters.WorkerThread(context, sqlServerInfo).QueryAndSerializeData();
-                dictBags.GetOrAdd("worker_thread", new ConcurrentBag<string>()).Add(retString);
+                var retDict = new Counters.WorkerThread(context, sqlServerInfo).QueryAndSerializeData();
+                dict.Merge(retDict);
 
                 //var pc = new Counters.PerformanceCounters(context, sqlServerInfo).QueryAndSerializeData();
                 //dictBags.GetOrAdd("performance_counters", new ConcurrentBag<string>()).Add(pc);

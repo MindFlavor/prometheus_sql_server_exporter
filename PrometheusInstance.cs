@@ -19,6 +19,14 @@ namespace MindFlavor.SQLServerExporter
 
         public void Add(string value) { this.values.Add(value); }
 
+        public void Merge(PrometheusInstance pi)
+        {
+            if (this.Type != pi.Type)
+                throw new System.ArgumentException("incompatible PrometheusInstances");
+
+            this.values.AddRange(pi.values);
+        }
+
         public string SerializeHeader()
         {
             return $"TYPE {Type}\nHELP {Help}\n";

@@ -28,48 +28,7 @@ namespace MindFlavor.SQLServerExporter.Counters
             logger = context.RequestServices.GetRequiredService<ILogger<WorkerThread>>();
         }
 
-        public string QueryAndSerializeData()
-        {
-            using (SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString))
-            {
-                logger.LogDebug($"About to open connection to {this.SQLServerInfo.Name}");
-                conn.Open();
-
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-
-                string tsql = TSQLStore.ProbeTSQL("worker_threads", this.SQLServerInfo);
-
-                logger.LogDebug($"Probing worker_threads for {this.SQLServerInfo.Name}, version {this.SQLServerInfo.Version} returned {tsql}");
-
-                using (SqlCommand cmd = new SqlCommand(tsql, conn))
-                {
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            int parent_node_id = reader.GetInt32(0);
-                            int scheduler_id = reader.GetInt32(1);
-                            int cpu_id = reader.GetInt32(2);
-
-                            for (int i = 3; i < reader.FieldCount; i++)
-                            {
-                                sb.Append($"sql_os_schedulers_{reader.GetName(i)}{{instance=\"{this.SQLServerInfo.Name}\", parent_node_id=\"{parent_node_id}\", scheduler_id=\"{scheduler_id}\", cpu_id=\"{cpu_id}\"}} ");
-                                if (reader.GetFieldType(i) == typeof(bool))
-                                    sb.Append($"{(reader.GetBoolean(i) == true ? "1" : "0")}\n");
-                                else if (reader.GetFieldType(i) == typeof(Int32))
-                                    sb.Append($"{reader.GetInt32(i)}\n");
-                                else
-                                    sb.Append($"{reader.GetInt64(i)}\n");
-                            }
-                        }
-                    }
-                }
-
-                return sb.ToString();
-            }
-        }
-
-        public PrometheusInstanceDictionary QueryAndSerializeData2()
+        public PrometheusInstanceDictionary QueryAndSerializeData()
         {
             PrometheusInstanceDictionary dic = new PrometheusInstanceDictionary();
 
@@ -100,13 +59,13 @@ namespace MindFlavor.SQLServerExporter.Counters
 
                                 sb.Append($"sql_os_schedulers_{reader.GetName(i)}{{instance=\"{this.SQLServerInfo.Name}\", parent_node_id=\"{parent_node_id}\", scheduler_id=\"{scheduler_id}\", cpu_id=\"{cpu_id}\"}} ");
                                 if (reader.GetFieldType(i) == typeof(bool))
-                                    sb.Append($"{(reader.GetBoolean(i) == true ? "1" : "0")}\n");
+                                    sb.Append($"{(reader.GetBoolean(i) == true ? "1" : "0")}");
                                 else if (reader.GetFieldType(i) == typeof(Int32))
-                                    sb.Append($"{reader.GetInt32(i)}\n");
+                                    sb.Append($"{reader.GetInt32(i)}");
                                 else
-                                    sb.Append($"{reader.GetInt64(i)}\n");
+                                    sb.Append($"{reader.GetInt64(i)}");
 
-                                dic.Add(type, $"{type} counter", sb.ToString());
+                                dic.Add(type, $"{type}", sb.ToString());
                             }
                         }
                     }
