@@ -23,7 +23,7 @@ namespace MindFlavor.SQLServerExporter
             app.Run(async context =>
             {
                 var logger = context.RequestServices.GetRequiredService<ILogger<SQLServerHandler>>();
-                logger.LogDebug($"Called method {context.Request.Method}, remote IP {context.Connection.RemoteIpAddress.ToString()}");
+                logger.LogDebug($"Called method {context.Request.Method}, remote IP {context.Connection?.RemoteIpAddress?.ToString()}");
                 if (context.Request.Method != "GET")
                 {
                     context.Response.StatusCode = StatusCodes.Status405MethodNotAllowed;
