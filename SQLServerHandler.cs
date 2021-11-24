@@ -124,7 +124,7 @@ namespace MindFlavor.SQLServerExporter
                     {
                         var l =
                             new Counters.CustomCounter(context, sqlServerInfo, customCounterConfiguration.CustomCounter).QueryAndSerializeData();
-                        dictBags.GetOrAdd(customCounterConfiguration.CustomCounter.Name, new ConcurrentBag<string>()).Add(l);
+                        dictBags.GetOrAdd("todo", new ConcurrentBag<string>()).Add(l);
                     }
                 }
             }

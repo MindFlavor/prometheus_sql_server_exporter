@@ -21,19 +21,14 @@ namespace MindFlavor.SQLServerExporter.Counters
             this.Configuration = configuration;
         }
 
-        public string GenerateHeader()
-        {
-            return $"# TYPE {Configuration.Name} {Configuration.CounterType}\nHELP {Configuration.HelpText}\n";
-        }
-
         public string QueryAndSerializeData()
         {
+            System.Text.StringBuilder sbCustomCounter = new System.Text.StringBuilder();
             using (SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString))
             {
                 logger.LogDebug($"About to open connection to {this.SQLServerInfo.Name}");
                 conn.Open();
 
-                System.Text.StringBuilder sbCustomCounter = new System.Text.StringBuilder();
 
                 using (SqlCommand cmd = new SqlCommand(this.Configuration.TSQL, conn))
                 {
@@ -46,25 +41,28 @@ namespace MindFlavor.SQLServerExporter.Counters
                             {
                                 attributes.Add((string)reader[header]);
                             }
-                            var value = reader[Configuration.Value];
 
-                            sbCustomCounter.Append($"{Configuration.Name}{{instance=\"{this.SQLServerInfo.Name}\"");
-                            for (int i = 0; i < attributes.Count; i++)
+                            foreach (var value in Configuration.Values)
                             {
-                                sbCustomCounter.Append($", {Configuration.Attributes[i]}=\"{attributes[i]}\"");
-                            }
+                                var valueFromReader = reader[value.Value];
 
-                            sbCustomCounter.Append($"}} {value}\n");
+                                sbCustomCounter.Append($"{value.Name}{{instance=\"{this.SQLServerInfo.Name}\"");
+                                for (int i = 0; i < attributes.Count; i++)
+                                {
+                                    sbCustomCounter.Append($", {Configuration.Attributes[i]}=\"{attributes[i]}\"");
+                                }
+
+                                sbCustomCounter.Append($"}} {valueFromReader}\n");
+
+                            }
                         }
                     }
                 }
-
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                //sb.Append(GenerateHeader());
-                sb.Append(sbCustomCounter);
-
-                return $"# HELP {Configuration.HelpText}\n# TYPE {Configuration.Name} {Configuration.CounterType}\n{sb.ToString()}";
             }
+
+            // TODO: Add HELP section
+            var s = sbCustomCounter.ToString();
+            return s;
         }
     }
 }
