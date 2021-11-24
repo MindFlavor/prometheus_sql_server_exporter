@@ -23,45 +23,46 @@ namespace MindFlavor.SQLServerExporter.Counters
 
         public string QueryAndSerializeData()
         {
-            System.Text.StringBuilder sbCustomCounter = new System.Text.StringBuilder();
-            using (SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString))
+            using SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString);
+
+            logger.LogDebug($"About to open connection to {this.SQLServerInfo.Name}");
+            conn.Open();
+
+            // build Metrics based on Configuration
+            var metrics = new Prometheus.Metric[Configuration.Values.Length];
+            for (int i = 0; i < metrics.Length; i++)
             {
-                logger.LogDebug($"About to open connection to {this.SQLServerInfo.Name}");
-                conn.Open();
+                metrics[i] = new Prometheus.Metric(Configuration.Values[i].Name, Configuration.Values[i].HelpText, Configuration.Values[i].CounterType);
+            }
 
+            using SqlCommand cmd = new SqlCommand(this.Configuration.TSQL, conn);
+            using var reader = cmd.ExecuteReader();
 
-                using (SqlCommand cmd = new SqlCommand(this.Configuration.TSQL, conn))
+            while (reader.Read())
+            {
+
+                for (int i = 0; i < Configuration.Values.Length; i++)
                 {
-                    using (var reader = cmd.ExecuteReader())
+                    Prometheus.Instance instance = new Prometheus.Instance(this.SQLServerInfo.Name);
+                    foreach (var header in Configuration.Attributes)
                     {
-                        while (reader.Read())
-                        {
-                            var attributes = new List<string>();
-                            foreach (var header in Configuration.Attributes)
-                            {
-                                attributes.Add((string)reader[header]);
-                            }
-
-                            foreach (var value in Configuration.Values)
-                            {
-                                var valueFromReader = reader[value.Value];
-
-                                sbCustomCounter.Append($"{value.Name}{{instance=\"{this.SQLServerInfo.Name}\"");
-                                for (int i = 0; i < attributes.Count; i++)
-                                {
-                                    sbCustomCounter.Append($", {Configuration.Attributes[i]}=\"{attributes[i]}\"");
-                                }
-
-                                sbCustomCounter.Append($"}} {valueFromReader}\n");
-
-                            }
-                        }
+                        instance.Attributes.Add(new KeyValuePair<string, string>(header, (string)reader[header]));
                     }
+
+                    instance.Value = reader[Configuration.Values[i].Value].ToString();
+
+                    metrics[i].Instances.Add(instance);
                 }
             }
 
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            foreach (var metric in metrics)
+            {
+                sb.Append(metric.Render());
+            }
+
             // TODO: Add HELP section
-            var s = sbCustomCounter.ToString();
+            var s = sb.ToString();
             return s;
         }
     }

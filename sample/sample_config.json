@@ -20,7 +20,7 @@
     "customCounters": [
         {
             "customCounter": {
-                "tsql": "SELECT [status], COUNT(*) AS cnt, 1 AS fixed FROM sys.dm_exec_requests WHERE session_id > 50 GROUP BY [status];",
+                "tsql": "SELECT [status], COUNT(*) + 20 AS cnt, 1 AS fixed FROM sys.dm_exec_requests WHERE session_id > 50 GROUP BY [status];",
                 "attributes": [
                     "status"
                 ],
