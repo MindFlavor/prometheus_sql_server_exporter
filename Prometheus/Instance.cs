@@ -17,7 +17,7 @@ public class Instance
     {
         StringBuilder sb = new StringBuilder();
         Attributes.ForEach(kvp => sb.Append($"{kvp.Key}=\"{kvp.Value}\", "));
-        sb.Length = sb.Length-2;
+        sb.Length = sb.Length - 2;
 
         return $"{{{sb.ToString()}}} {Value}";
     }

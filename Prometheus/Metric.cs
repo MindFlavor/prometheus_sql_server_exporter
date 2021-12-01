@@ -27,7 +27,7 @@ public class Metric
 
         foreach (var instance in Instances)
         {
-            sb.Append($"{Name} {instance.Render()}\n");
+            sb.Append($"{Name}{instance.Render()}\n");
         }
 
         return sb.ToString();
