@@ -61,7 +61,6 @@ namespace MindFlavor.SQLServerExporter.Counters
                 sb.Append(metric.Render());
             }
 
-            // TODO: Add HELP section
             var s = sb.ToString();
             return s;
         }
