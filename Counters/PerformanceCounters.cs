@@ -147,17 +147,18 @@ namespace MindFlavor.SQLServerExporter.Counters
 
                                     string gpcName = $"sql_pc_{gpc.name}";
 
-                                    //sb.Append($"# TYPE {gpcName} {gpc.type}\n");
-
-                                    string completeName = $"{gpcName}{{instance=\"{this.SQLServerInfo.Name}\"";
+                                    var metric = new Prometheus.Metric(gpcName, gpcName, "gauge");
+                                    var instance = new Prometheus.Instance(this.SQLServerInfo.Name);
 
                                     if (!string.IsNullOrEmpty(instanceName))
                                     {
-                                        completeName += $", counter_instance=\"{instanceName}\"";
+                                        instance.Attributes.Add(new KeyValuePair<string, string>("counter_instance", instanceName));
                                     }
-                                    completeName += "}";
 
-                                    sb.Append($"{completeName} {cntr_value.ToString()}\n");
+                                    instance.Value = cntr_value.ToString();
+                                    metric.Instances.Add(instance);
+
+                                    sb.Append(metric.Render());
                                 }
                                 else
                                 {
