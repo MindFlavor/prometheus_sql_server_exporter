@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MindFlavor.Prometheus;
 
 namespace MindFlavor.SQLServerExporter.Counters
 {
@@ -21,7 +22,7 @@ namespace MindFlavor.SQLServerExporter.Counters
             this.Configuration = configuration;
         }
 
-        public string QueryAndSerializeData()
+        public void QueryAndAddToSharedMetricDictionary(ConcurrentMetricDictionary sharedMetricDictionary)
         {
             using SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString);
 
@@ -54,15 +55,8 @@ namespace MindFlavor.SQLServerExporter.Counters
                     metrics[i].Instances.Add(instance);
                 }
             }
-
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            foreach (var metric in metrics)
-            {
-                sb.Append(metric.Render());
-            }
-
-            var s = sb.ToString();
-            return s;
-        }
+            
+            sharedMetricDictionary.Merge(metrics);
+       }
     }
 }

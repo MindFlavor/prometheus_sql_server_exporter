@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MindFlavor.Prometheus;
 
 namespace MindFlavor.SQLServerExporter.Counters
 {
@@ -29,7 +30,7 @@ namespace MindFlavor.SQLServerExporter.Counters
 
     public class PerformanceCounters
     {
-        private static HashSet<string>? EnabledCounters { get; set; } = null;
+        private HashSet<string>? EnabledCounters { get; set; } = null;
         static Dictionary<string, GrafanaPerformanceCounter> _dGraf;
 
         public SQLServerInfo SQLServerInfo;
@@ -98,21 +99,20 @@ namespace MindFlavor.SQLServerExporter.Counters
             return objectName + "_" + counterName;
         }
 
-        public string QueryAndSerializeData()
+        public void QueryAndAddToSharedMetricDictionary(ConcurrentMetricDictionary sharedMetricDictionary)
         {
             if (EnabledCounters == null)
                 throw new Exception("EnabledCounters must not be null at this phase.");
             else
             {
+                var metrics = new List<Metric>();
+
                 using (SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString))
                 {
                     logger.LogDebug($"About to open connection to {this.SQLServerInfo.Name}");
                     conn.Open();
 
-                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
-
                     string tsql = TSQLStore.ProbeTSQL("performance_counters", this.SQLServerInfo);
-
                     logger.LogDebug($"Probing performance counters for {this.SQLServerInfo.Name}, version {this.SQLServerInfo.Version} returned {tsql}");
 
                     using (SqlCommand cmd = new SqlCommand(tsql, conn))
@@ -158,7 +158,7 @@ namespace MindFlavor.SQLServerExporter.Counters
                                     instance.Value = cntr_value.ToString();
                                     metric.Instances.Add(instance);
 
-                                    sb.Append(metric.Render());
+                                    metrics.Add(metric);
                                 }
                                 else
                                 {
@@ -167,8 +167,8 @@ namespace MindFlavor.SQLServerExporter.Counters
                             }
                         }
                     }
-
-                    return sb.ToString();
+                    
+                    sharedMetricDictionary.Merge(metrics);
                 }
             }
         }

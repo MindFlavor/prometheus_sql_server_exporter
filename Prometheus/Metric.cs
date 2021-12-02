@@ -1,4 +1,4 @@
-using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace MindFlavor.Prometheus;
 
@@ -8,7 +8,7 @@ public class Metric
     public string? Help { get; set; }
     public string CounterType { get; set; }
 
-    public ConcurrentBag<Instance> Instances { get; set; } = new ConcurrentBag<Instance>();
+    public List<Instance> Instances { get; set; } = new List<Instance>();
 
     public Metric(string Name, string? Help, string CounterType)
     {

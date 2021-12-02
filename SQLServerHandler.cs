@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Http;
+using MindFlavor.Prometheus;
 
 namespace MindFlavor.SQLServerExporter
 {
@@ -31,22 +32,20 @@ namespace MindFlavor.SQLServerExporter
                 }
 
                 List<Thread> lThreads = new List<Thread>();
-                ConcurrentDictionary<string, ConcurrentBag<string>> dictBag = new ConcurrentDictionary<string, ConcurrentBag<string>>();
+                ConcurrentMetricDictionary sharedMetricDictionary = new ConcurrentMetricDictionary();
 
                 logger.LogDebug($"Before foreach(... {Program.CommandLineOptions!.Instances.Count})");
                 try
                 {
                     foreach (var instance in Program.CommandLineOptions.Instances)
                     {
-                        logger.LogDebug($"Adding ProcessInstance({context.ToString()}, {instance.ConnectionString}, {dictBag.ToString()}");
+                        logger.LogDebug($"Adding ProcessInstance(context == {context.ToString()}, instance == {instance.ConnectionString}, sharedMetricDictionary = <..>)");
 
                         var pts = new ParameterizedThreadStart(ProcessInstance);
                         Thread thread = new Thread(pts);
                         thread.Priority = ThreadPriority.BelowNormal;
                         thread.Name = new System.Data.SqlClient.SqlConnectionStringBuilder(instance.ConnectionString).DataSource;
-                        thread.Start(new Tuple<HttpContext, string,
-                            System.Collections.Concurrent.ConcurrentDictionary<string, ConcurrentBag<string>>>
-                             (context, instance.ConnectionString, dictBag));
+                        thread.Start(new Tuple<HttpContext, string, ConcurrentMetricDictionary>(context, instance.ConnectionString, sharedMetricDictionary));
                         lThreads.Add(thread);
                     }
 
@@ -73,17 +72,7 @@ namespace MindFlavor.SQLServerExporter
                     lThreads.ForEach(t => t.Join());
 
                     context.Response.StatusCode = StatusCodes.Status200OK;
-
-                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                    foreach (var bags in dictBag.Values)
-                    {
-                        foreach (var s in bags)
-                        {
-                            sb.Append(s);
-                        }
-                    }
-
-                    await context.Response.WriteAsync(sb.ToString());
+                    await context.Response.WriteAsync(sharedMetricDictionary.Render(false));
                 }
                 catch (Exception exce)
                 {
@@ -95,36 +84,27 @@ namespace MindFlavor.SQLServerExporter
 
         private static void ProcessInstance(object? o)
         {
-            Tuple<HttpContext, string, ConcurrentDictionary<string, ConcurrentBag<string>>> tuple = (Tuple<HttpContext, string, ConcurrentDictionary<string, ConcurrentBag<string>>>)o!;
+            Tuple<HttpContext, string, ConcurrentMetricDictionary> tuple = (Tuple<HttpContext, string, ConcurrentMetricDictionary>)o!;
             HttpContext context = tuple.Item1;
             string connectionString = tuple.Item2;
-            ConcurrentDictionary<string, ConcurrentBag<string>> dictBags = tuple.Item3;
+            ConcurrentMetricDictionary sharedMetricDictionary = tuple.Item3;
 
             var logger = context.RequestServices.GetRequiredService<ILogger<SQLServerHandler>>();
-            logger.LogTrace($"Called ProcessInstance(connectionString = {connectionString}, dictBags={dictBags.ToString()}");
+            logger.LogTrace($"Called ProcessInstance(connectionString = {connectionString}, ...)");
 
             try
             {
                 var sqlServerInfo = SQLServerUtils.GetSQLServerInfo(context, connectionString);
-                var retString = new Counters.WorkerThread(context, sqlServerInfo).QueryAndSerializeData();
-                dictBags.GetOrAdd("worker_thread", new ConcurrentBag<string>()).Add(retString);
-
-                var pc = new Counters.PerformanceCounters(context, sqlServerInfo).QueryAndSerializeData();
-                dictBags.GetOrAdd("performance_counters", new ConcurrentBag<string>()).Add(pc);
-
-                var waitStats = new Counters.WaitStats(context, sqlServerInfo).QueryAndSerializeData();
-                dictBags.GetOrAdd("wait_stats", new ConcurrentBag<string>()).Add(waitStats);
-
-                var clerks = new Counters.MemoryClerks(context, sqlServerInfo).QueryAndSerializeData();
-                dictBags.GetOrAdd("memory_clerks", new ConcurrentBag<string>()).Add(clerks);
+                new Counters.WorkerThread(context, sqlServerInfo).QueryAndAddToSharedMetricDictionary(sharedMetricDictionary);
+                new Counters.PerformanceCounters(context, sqlServerInfo).QueryAndAddToSharedMetricDictionary(sharedMetricDictionary);
+                new Counters.WaitStats(context, sqlServerInfo).QueryAndAddToSharedMetricDictionary(sharedMetricDictionary);
+                new Counters.MemoryClerks(context, sqlServerInfo).QueryAndAddToSharedMetricDictionary(sharedMetricDictionary);
 
                 if (Program.CommandLineOptions != null)
                 {
                     foreach (var customCounterConfiguration in Program.CommandLineOptions.CustomCounters)
                     {
-                        var l =
-                            new Counters.CustomCounter(context, sqlServerInfo, customCounterConfiguration.CustomCounter).QueryAndSerializeData();
-                        dictBags.GetOrAdd("todo", new ConcurrentBag<string>()).Add(l);
+                        new Counters.CustomCounter(context, sqlServerInfo, customCounterConfiguration.CustomCounter).QueryAndAddToSharedMetricDictionary(sharedMetricDictionary);
                     }
                 }
             }

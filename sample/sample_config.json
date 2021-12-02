@@ -4,6 +4,9 @@
     "instances": [
         {
             "connectionString": "Server=127.0.0.1;User Id=other_admin;Password=Passw0rd;Connection timeout=5;"
+        },
+        {
+            "connectionString": "Server=varch.mindflavor.it;User Id=prometheus;Password=Passw0rd;Connection timeout=5;"
         }
     ],
     "waitStats": {

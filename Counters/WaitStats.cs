@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MindFlavor.Prometheus;
 
 namespace MindFlavor.SQLServerExporter.Counters
 {
@@ -75,7 +76,7 @@ namespace MindFlavor.SQLServerExporter.Counters
             }
         }
 
-        public string QueryAndSerializeData()
+        public void QueryAndAddToSharedMetricDictionary(ConcurrentMetricDictionary sharedMetricDictionary)
         {
             using (SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString))
             {
@@ -108,11 +109,7 @@ namespace MindFlavor.SQLServerExporter.Counters
                     }
                 }
 
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append(pTasksCount.Render());
-                sb.Append(pWaitTimeMS.Render());
-
-                return sb.ToString();
+                sharedMetricDictionary.Merge(new Metric[] { pTasksCount, pWaitTimeMS });
             }
         }
     }
