@@ -8,7 +8,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 as debug
 
 WORKDIR /app
 
-COPY --from=build_debug /app/bin/Debug/netcoreapp5.0/publish /app
+COPY --from=build_debug /app/bin/Debug/netcoreapp6.0/publish /app
 COPY --from=build_debug /app/Templates /app/Templates
 
 EXPOSE 9966
