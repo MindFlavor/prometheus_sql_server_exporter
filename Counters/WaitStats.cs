@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MindFlavor.Prometheus;
 
 namespace MindFlavor.SQLServerExporter.Counters
 {
@@ -75,15 +76,15 @@ namespace MindFlavor.SQLServerExporter.Counters
             }
         }
 
-        public string QueryAndSerializeData()
+        public void QueryAndAddToSharedMetricDictionary(ConcurrentMetricDictionary sharedMetricDictionary)
         {
             using (SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString))
             {
                 logger.LogDebug($"About to open connection to {this.SQLServerInfo.Name}");
                 conn.Open();
 
-                System.Text.StringBuilder sbTasksCount = new System.Text.StringBuilder();
-                System.Text.StringBuilder sbWaitTimeMS = new System.Text.StringBuilder();
+                var pTasksCount = new Prometheus.Metric("sql_waiting_tasks_count", "sql_waiting_tasks_count", "gauge");
+                var pWaitTimeMS = new Prometheus.Metric("sql_wait_time_ms", "sql_wait_time_ms", "gauge");
 
                 using (SqlCommand cmd = new SqlCommand(TSQLQuery, conn))
                 {
@@ -95,20 +96,20 @@ namespace MindFlavor.SQLServerExporter.Counters
                             long waitingTasksCount = reader.GetInt64(1);
                             long waitTimeMS = reader.GetInt64(2);
 
-                            sbTasksCount.Append($"sql_waiting_tasks_count{{instance=\"{this.SQLServerInfo.Name}\", wait=\"{waitType}\"}} {waitingTasksCount}\n");
-                            sbWaitTimeMS.Append($"sql_wait_time_ms{{instance=\"{this.SQLServerInfo.Name}\", wait=\"{waitType}\"}} {waitTimeMS}\n");
+                            Prometheus.Instance instance = new Prometheus.Instance(this.SQLServerInfo.Name);
+                            instance.Attributes.Add(new KeyValuePair<string, string>("wait", waitType));
+                            instance.Value = waitingTasksCount.ToString();
+                            pTasksCount.Instances.Add(instance);
+
+                            instance = new Prometheus.Instance(this.SQLServerInfo.Name);
+                            instance.Attributes.Add(new KeyValuePair<string, string>("wait", waitType));
+                            instance.Value = waitTimeMS.ToString();
+                            pWaitTimeMS.Instances.Add(instance);
                         }
                     }
                 }
 
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append("# TYPE sql_waiting_tasks_count gauge\n");
-                sb.Append(sbTasksCount);
-
-                sb.Append("# TYPE sql_wait_time_ms counter\n");
-                sb.Append(sbWaitTimeMS);
-
-                return sb.ToString();
+                sharedMetricDictionary.Merge(new Metric[] { pTasksCount, pWaitTimeMS });
             }
         }
     }

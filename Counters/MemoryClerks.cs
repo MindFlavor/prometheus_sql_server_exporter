@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MindFlavor.Prometheus;
 
 namespace MindFlavor.SQLServerExporter.Counters
 {
@@ -23,18 +24,18 @@ namespace MindFlavor.SQLServerExporter.Counters
             TSQLQuery = TSQLStore.ProbeTSQL("memory_clerks", this.SQLServerInfo);
         }
 
-        public string QueryAndSerializeData()
+        public void QueryAndAddToSharedMetricDictionary(ConcurrentMetricDictionary sharedMetricDictionary)
         {
             using (SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString))
             {
                 logger.LogDebug($"About to open connection to {this.SQLServerInfo.Name}");
                 conn.Open();
 
-                System.Text.StringBuilder sbSumPagesKB = new System.Text.StringBuilder();
-                System.Text.StringBuilder sbSumVirtualMemoryReservedKB = new System.Text.StringBuilder();
-                System.Text.StringBuilder sbSumVirtualMemoryCommittedKB = new System.Text.StringBuilder();
-                System.Text.StringBuilder sbSumSharedMemoryReservedKB = new System.Text.StringBuilder();
-                System.Text.StringBuilder sbSumSharedMemoryCommittedKB = new System.Text.StringBuilder();
+                var pSumPagesKB = new Prometheus.Metric("sql_memory_clerks_sum_pages_kb", "sql_memory_clerks_sum_pages_kb", "gauge");
+                var pSumVirtualMemoryReservedKB = new Prometheus.Metric("sql_memory_clerks_sum_virtual_memory_reserved_kb", "sql_memory_clerks_sum_virtual_memory_reserved_kb", "gauge");
+                var pSumVirtualMemoryCommittedKB = new Prometheus.Metric("sql_memory_clerks_sum_virtual_memory_committed_kb", "sql_memory_clerks_sum_virtual_memory_committed_kb", "gauge");
+                var pSumSharedMemoryReservedKB = new Prometheus.Metric("sql_memory_clerks_sum_shared_memory_reserved_kb", "sql_memory_clerks_sum_shared_memory_reserved_kb", "gauge");
+                var pSumSharedMemoryCommittedKB = new Prometheus.Metric("sql_memory_clerks_sum_shared_memory_committed_kb", "sql_memory_clerks_sum_shared_memory_committed_kb", "gauge");
 
                 using (SqlCommand cmd = new SqlCommand(TSQLQuery, conn))
                 {
@@ -49,33 +50,42 @@ namespace MindFlavor.SQLServerExporter.Counters
                             long sum_shared_memory_reserved_kb = reader.GetInt64(4);
                             long sum_shared_memory_committed_kb = reader.GetInt64(5);
 
+                            Prometheus.Instance instance = new Prometheus.Instance(this.SQLServerInfo.Name);
+                            instance.Attributes.Add(new KeyValuePair<string, string>("clerk", clerk_name));
+                            instance.Value = sum_pages_kb.ToString();
+                            pSumPagesKB.Instances.Add(instance);
 
-                            sbSumPagesKB.Append($"sql_memory_clerks_sum_pages_kb{{instance=\"{this.SQLServerInfo.Name}\", clerk=\"{clerk_name}\"}} {sum_pages_kb}\n");
-                            sbSumVirtualMemoryReservedKB.Append($"sql_memory_clerks_sum_virtual_memory_reserved_kb{{instance=\"{this.SQLServerInfo.Name}\", clerk=\"{clerk_name}\"}} {sum_virtual_memory_reserved_kb}\n");
-                            sbSumVirtualMemoryCommittedKB.Append($"sql_memory_clerks_sum_virtual_memory_committed_kb{{instance=\"{this.SQLServerInfo.Name}\", clerk=\"{clerk_name}\"}} {sum_virtual_memory_committed_kb}\n");
-                            sbSumSharedMemoryReservedKB.Append($"sql_memory_clerks_sum_shared_memory_reserved_kb{{instance=\"{this.SQLServerInfo.Name}\", clerk=\"{clerk_name}\"}} {sum_shared_memory_reserved_kb}\n");
-                            sbSumSharedMemoryCommittedKB.Append($"sql_memory_clerks_sum_shared_memory_committed_kb{{instance=\"{this.SQLServerInfo.Name}\", clerk=\"{clerk_name}\"}} {sum_shared_memory_committed_kb}\n");
+                            instance = new Prometheus.Instance(this.SQLServerInfo.Name);
+                            instance.Attributes.Add(new KeyValuePair<string, string>("clerk", clerk_name));
+                            instance.Value = sum_virtual_memory_reserved_kb.ToString();
+                            pSumSharedMemoryReservedKB.Instances.Add(instance);
+
+                            instance = new Prometheus.Instance(this.SQLServerInfo.Name);
+                            instance.Attributes.Add(new KeyValuePair<string, string>("clerk", clerk_name));
+                            instance.Value = sum_virtual_memory_committed_kb.ToString();
+                            pSumVirtualMemoryCommittedKB.Instances.Add(instance);
+
+                            instance = new Prometheus.Instance(this.SQLServerInfo.Name);
+                            instance.Attributes.Add(new KeyValuePair<string, string>("clerk", clerk_name));
+                            instance.Value = sum_shared_memory_reserved_kb.ToString();
+                            pSumSharedMemoryReservedKB.Instances.Add(instance);
+
+                            instance = new Prometheus.Instance(this.SQLServerInfo.Name);
+                            instance.Attributes.Add(new KeyValuePair<string, string>("clerk", clerk_name));
+                            instance.Value = sum_shared_memory_committed_kb.ToString();
+                            pSumSharedMemoryCommittedKB.Instances.Add(instance);
                         }
                     }
                 }
 
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                //sb.Append("# TYPE sql_memory_clerks_sum_pages_kb gauge\n");
-                sb.Append(sbSumPagesKB);
+                sharedMetricDictionary.Merge(new Metric[] {
+                    pSumPagesKB,
+                    pSumVirtualMemoryReservedKB,
+                    pSumVirtualMemoryCommittedKB,
+                    pSumSharedMemoryReservedKB,
+                    pSumSharedMemoryCommittedKB
+                });
 
-                //sb.Append("# TYPE sql_memory_clerks_sum_virtual_memory_reserved_kb gauge\n");
-                sb.Append(sbSumVirtualMemoryReservedKB);
-
-                //sb.Append("# TYPE sql_memory_clerks_sum_virtual_memory_committed_kb gauge\n");
-                sb.Append(sbSumVirtualMemoryCommittedKB);
-
-                //sb.Append("# TYPE sql_memory_clerks_sum_shared_memory_reserved_kb gauge\n");
-                sb.Append(sbSumSharedMemoryReservedKB);
-
-                //sb.Append("# TYPE sql_memory_clerks_sum_shared_memory_committed_kb gauge\n");
-                sb.Append(sbSumSharedMemoryCommittedKB);
-
-                return sb.ToString();
             }
         }
     }

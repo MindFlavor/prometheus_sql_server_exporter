@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MindFlavor.Prometheus;
 
 namespace MindFlavor.SQLServerExporter.Counters
 {
@@ -21,50 +22,41 @@ namespace MindFlavor.SQLServerExporter.Counters
             this.Configuration = configuration;
         }
 
-        public string GenerateHeader()
+        public void QueryAndAddToSharedMetricDictionary(ConcurrentMetricDictionary sharedMetricDictionary)
         {
-            return $"# TYPE {Configuration.Name} {Configuration.CounterType}\nHELP {Configuration.HelpText}\n";
-        }
+            using SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString);
 
-        public string QueryAndSerializeData()
-        {
-            using (SqlConnection conn = new SqlConnection(this.SQLServerInfo.ConnectionString))
+            logger.LogDebug($"About to open connection to {this.SQLServerInfo.Name}");
+            conn.Open();
+
+            // build Metrics based on Configuration
+            var metrics = new Prometheus.Metric[Configuration.Values.Length];
+            for (int i = 0; i < metrics.Length; i++)
             {
-                logger.LogDebug($"About to open connection to {this.SQLServerInfo.Name}");
-                conn.Open();
-
-                System.Text.StringBuilder sbCustomCounter = new System.Text.StringBuilder();
-
-                using (SqlCommand cmd = new SqlCommand(this.Configuration.TSQL, conn))
-                {
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            var attributes = new List<string>();
-                            foreach (var header in Configuration.Attributes)
-                            {
-                                attributes.Add((string)reader[header]);
-                            }
-                            var value = reader[Configuration.Value];
-
-                            sbCustomCounter.Append($"{Configuration.Name}{{instance=\"{this.SQLServerInfo.Name}\"");
-                            for (int i = 0; i < attributes.Count; i++)
-                            {
-                                sbCustomCounter.Append($", {Configuration.Attributes[i]}=\"{attributes[i]}\"");
-                            }
-
-                            sbCustomCounter.Append($"}} {value}\n");
-                        }
-                    }
-                }
-
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                //sb.Append(GenerateHeader());
-                sb.Append(sbCustomCounter);
-
-                return $"# HELP {Configuration.HelpText}\n# TYPE {Configuration.Name} {Configuration.CounterType}\n{sb.ToString()}";
+                metrics[i] = new Prometheus.Metric(Configuration.Values[i].Name, Configuration.Values[i].HelpText, Configuration.Values[i].CounterType);
             }
-        }
+
+            using SqlCommand cmd = new SqlCommand(this.Configuration.TSQL, conn);
+            using var reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+
+                for (int i = 0; i < Configuration.Values.Length; i++)
+                {
+                    Prometheus.Instance instance = new Prometheus.Instance(this.SQLServerInfo.Name);
+                    foreach (var header in Configuration.Attributes)
+                    {
+                        instance.Attributes.Add(new KeyValuePair<string, string>(header, (string)reader[header]));
+                    }
+
+                    instance.Value = reader[Configuration.Values[i].Value].ToString();
+
+                    metrics[i].Instances.Add(instance);
+                }
+            }
+            
+            sharedMetricDictionary.Merge(metrics);
+       }
     }
 }

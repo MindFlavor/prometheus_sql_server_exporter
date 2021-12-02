@@ -53,16 +53,27 @@ public class CustomCounters
 
 public class CustomCounterConfiguration
 {
-    [JsonPropertyName("name")]
-    public string Name { get; set; } = string.Empty;
     [JsonPropertyName("tsql")]
     public string TSQL { get; set; } = string.Empty;
     [JsonPropertyName("attributes")]
     public string[] Attributes { get; set; } = new string[0];
-    [JsonPropertyName("value")]
-    public string Value { get; set; } = string.Empty;
+
+    [JsonPropertyName("values")]
+    public CustomCounterValue[] Values { get; set; } = new CustomCounterValue[0];
+}
+
+public class CustomCounterValue
+{
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = string.Empty;
+
     [JsonPropertyName("type")]
     public string CounterType { get; set; } = string.Empty;
+
     [JsonPropertyName("help_text")]
     public string HelpText { get; set; } = string.Empty;
+
+    [JsonPropertyName("value")]
+    public string Value { get; set; } = string.Empty;
+
 }
