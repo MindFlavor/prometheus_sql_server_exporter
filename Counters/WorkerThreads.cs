@@ -55,6 +55,8 @@ namespace MindFlavor.SQLServerExporter.Counters
                                     instance.Value = reader.GetInt32(i).ToString();
                                 else
                                     instance.Value = reader.GetInt64(i).ToString();
+                                
+                                metric.Instances.Add(instance);
                             }
                         }
                     }
